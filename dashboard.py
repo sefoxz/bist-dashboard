@@ -60,14 +60,11 @@ st.markdown("""
     .stSlider > div > div > div { background: #3b82f6; }
     .stRadio > div { gap: 10px; }
     .stRadio label { color: #94a3b8; }
-    .stExpander { background: #111827; border: 1px solid #1e293b; border-radius: 12px; }
-    .stExpander header { color: #e0e6f0; font-weight: 600; }
     .stTextInput > div > div > input { background: #111827; color: white; border: 1px solid #1e293b; border-radius: 10px; }
 
-    /* Sektör expander okları için KALICI çözüm */
-    details > summary { list-style: none; }
-    details > summary::-webkit-details-marker { display: none; }
-    details > summary::marker { display: none; content: ""; }
+    /* KESİN OK ÇÖZÜMÜ: expander header'daki svg'yi tamamen yok et */
+    [data-testid="stExpander"] svg { display: none !important; visibility: hidden !important; width: 0 !important; height: 0 !important; }
+    [data-testid="stExpander"] .st-cb { padding-left: 0 !important; }
 </style>
 """, unsafe_allow_html=True)
 
