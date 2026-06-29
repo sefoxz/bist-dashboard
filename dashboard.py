@@ -12,22 +12,16 @@ from requests.adapters import HTTPAdapter
 
 st.set_page_config(page_title="BIST Radar Pro", page_icon="📈", layout="wide")
 
-# ==========================================
-# MODERN STİL - BIST SCAN BENZERİ
-# ==========================================
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
     html, body, [class*="st-"] { font-family: 'Inter', sans-serif; }
     .stApp { background: linear-gradient(135deg, #0b0f19 0%, #0d1525 100%); color: #e0e6f0; }
-    
-    /* Üst bilgi bandı */
     .top-band { display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
     .metric-box {
         background: #111827; border: 1px solid #1e293b; border-radius: 14px;
         padding: 14px 22px; flex: 1; min-width: 130px; text-align: center;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        transition: 0.2s;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3); transition: 0.2s;
     }
     .metric-box:hover { border-color: #3b82f6; box-shadow: 0 0 18px rgba(59,130,246,0.15); }
     .metric-label { font-size: 12px; font-weight: 500; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; }
@@ -35,25 +29,19 @@ st.markdown("""
     .metric-change { font-size: 13px; font-weight: 500; }
     .change-up { color: #10b981; }
     .change-down { color: #ef4444; }
-    
-    /* Header */
     .header-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
     .update-time { font-size: 13px; color: #64748b; text-align: right; }
-    
-    /* Kartlar */
     .stock-card {
         background: #111827; border: 1px solid #1e293b; border-radius: 16px;
         padding: 18px 22px; margin: 8px 0;
         border-left: 4px solid #3b82f6;
         display: flex; justify-content: space-between; align-items: center;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        transition: 0.2s;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2); transition: 0.2s;
     }
     .stock-card:hover { border-color: #3b82f6; box-shadow: 0 4px 16px rgba(59,130,246,0.2); }
     .stock-card.skor-80 { border-left-color: #3b82f6; }
     .stock-card.skor-60 { border-left-color: #f59e0b; }
     .stock-card.skor-diger { border-left-color: #6b7280; }
-    
     .stock-name { font-size: 18px; font-weight: 700; color: #f1f5f9; }
     .stock-sector { font-size: 12px; color: #64748b; margin-left: 8px; }
     .stock-details { font-size: 13px; color: #94a3b8; line-height: 1.6; }
@@ -61,41 +49,31 @@ st.markdown("""
     .score-high { color: #3b82f6; }
     .score-mid { color: #f59e0b; }
     .score-low { color: #6b7280; }
-    
-    /* Buton */
     .stButton > button {
         background: #1e293b; color: #e0e6f0; border: 1px solid #334155; border-radius: 10px;
         font-weight: 600; padding: 10px 24px; transition: 0.2s;
     }
     .stButton > button:hover { background: #334155; border-color: #3b82f6; }
-    
-    /* Tablo */
     .stDataFrame { background: #111827; border: 1px solid #1e293b; border-radius: 12px; }
     .stDataFrame th { background: #1e293b; color: #94a3b8; font-weight: 600; }
     .stDataFrame td { color: #e0e6f0; }
-    
-    /* Slider */
     .stSlider > div > div > div { background: #3b82f6; }
-    
-    /* Radio buttons */
     .stRadio > div { gap: 10px; }
     .stRadio label { color: #94a3b8; }
-    
-    /* Expander */
     .stExpander { background: #111827; border: 1px solid #1e293b; border-radius: 12px; }
     .stExpander header { color: #e0e6f0; font-weight: 600; }
+    .stExpander svg { fill: #64748b !important; }
+    .stTextInput > div > div > input { background: #111827; color: white; border: 1px solid #1e293b; border-radius: 10px; }
 </style>
 """, unsafe_allow_html=True)
 
-# ==========================================
-# VERİ ÇEKME ALTYAPISI
-# ==========================================
 class DevNull:
     def write(self, msg): pass
     def flush(self): pass
 
 YF = requests.Session()
 YF.headers.update({"User-Agent": "Mozilla/5.0"})
+
 class TA(HTTPAdapter):
     def send(self, r, **k):
         k['timeout'] = 5
@@ -148,16 +126,25 @@ def euro_kuru():
 
 def gram_altin():
     try:
-        ons = yf.Ticker("GC=F", session=YF)
+        # Ons altın (USD)
+        ons = yf.Ticker("XAUUSD=X", session=YF)
         h_ons = _cek(ons, period="2d")
+        if h_ons.empty or len(h_ons) < 2: return None, None
+        ons_f = float(h_ons['Close'].iloc[-1])
+        ons_o = float(h_ons['Close'].iloc[-2])
+        
+        # USD/TRY
         usd = yf.Ticker("USDTRY=X", session=YF)
         h_usd = _cek(usd, period="2d")
-        if h_ons.empty or h_usd.empty: return None, None
-        ons_f = float(h_ons['Close'].iloc[-1]); usd_f = float(h_usd['Close'].iloc[-1])
-        ons_o = float(h_ons['Close'].iloc[-2]); usd_o = float(h_usd['Close'].iloc[-2])
-        gram = (ons_f * usd_f) / 31.1
-        gram_o = (ons_o * usd_o) / 31.1
-        return gram, ((gram-gram_o)/gram_o)*100
+        if h_usd.empty or len(h_usd) < 2: return None, None
+        usd_f = float(h_usd['Close'].iloc[-1])
+        usd_o = float(h_usd['Close'].iloc[-2])
+        
+        # Gram altın = (Ons fiyatı * USD/TRY) / 31.1035
+        gram_f = (ons_f * usd_f) / 31.1035
+        gram_o = (ons_o * usd_o) / 31.1035
+        
+        return gram_f, ((gram_f - gram_o) / gram_o) * 100
     except: return None, None
 
 def analiz_et(kod):
@@ -201,19 +188,12 @@ def analiz_et(kod):
 # ==========================================
 # ARAYÜZ
 # ==========================================
-# Header
 col_title, col_time = st.columns([3, 1])
-with col_title:
-    st.title("📊 BIST Radar Pro")
-    st.caption("BIST Scan benzeri profesyonel piyasa izleme")
-with col_time:
-    st.markdown(f'<div class="update-time">🕐 Son güncelleme:<br><b>{st.session_state.get("son_guncelleme", tr_saat())}</b></div>', unsafe_allow_html=True)
+with col_title: st.title("📊 BIST Radar Pro")
+with col_time: st.markdown(f'<div class="update-time">🕐 Son güncelleme:<br><b>{st.session_state.get("son_guncelleme", tr_saat())}</b></div>', unsafe_allow_html=True)
 
-# Session state
-if 'son_guncelleme' not in st.session_state:
-    st.session_state.son_guncelleme = tr_saat()
-if 'veri' not in st.session_state:
-    st.session_state.veri = None
+if 'son_guncelleme' not in st.session_state: st.session_state.son_guncelleme = tr_saat()
+if 'veri' not in st.session_state: st.session_state.veri = None
 
 col_btn, col_empty = st.columns([1, 3])
 with col_btn:
@@ -222,16 +202,14 @@ with col_btn:
         st.session_state.veri = None
         st.rerun()
 
-# Veri çekme
 if st.session_state.veri is None:
     with st.spinner('📡 Piyasa verileri alınıyor...'):
         bist_f, bist_d = bist100_durumu()
         usd_f, usd_d = dolar_kuru()
         eur_f, eur_d = euro_kuru()
         alt_f, alt_d = gram_altin()
-        
         sonuclar = []
-        with ThreadPoolExecutor(max_workers=8) as ex:
+        with ThreadPoolExecutor(max_workers=10) as ex:
             fs = {ex.submit(analiz_et, k): k for k in HISSE_LISTESI}
             for f in fs:
                 try:
@@ -239,7 +217,6 @@ if st.session_state.veri is None:
                     if a: sonuclar.append(a)
                 except: pass
         sonuclar.sort(key=lambda x: x["skor"], reverse=True)
-        
         skorlar, sayilar = {}, {}
         for a in sonuclar:
             s = HISSE_SEKTOR.get(a["hisse"],"Diger")
@@ -247,42 +224,64 @@ if st.session_state.veri is None:
             sayilar[s] = sayilar.get(s,0)+1
         sektor_ort = {s: round(skorlar[s]/sayilar[s],1) for s in skorlar}
         sirali = sorted(sektor_ort.items(), key=lambda x: x[1], reverse=True)
-        
         st.session_state.veri = {
             "bist_f": bist_f, "bist_d": bist_d,
             "usd_f": usd_f, "usd_d": usd_d,
             "eur_f": eur_f, "eur_d": eur_d,
             "alt_f": alt_f, "alt_d": alt_d,
-            "sonuclar": sonuclar,
-            "sektor_ort": sektor_ort,
-            "sirali": sirali
+            "sonuclar": sonuclar, "sektor_ort": sektor_ort, "sirali": sirali
         }
 
 veri = st.session_state.veri
 
 # Üst bant
 st.markdown('<div class="top-band">', unsafe_allow_html=True)
-
 metrics = [
     ("BIST 100", veri['bist_f'], veri['bist_d'], "📈"),
     ("USD/TRY", veri['usd_f'], veri['usd_d'], "💵"),
     ("EUR/TRY", veri['eur_f'], veri['eur_d'], "💶"),
     ("Gram Altın", veri['alt_f'], veri['alt_d'], "🥇"),
 ]
-
 for label, deger, degisim, ikon in metrics:
     if deger is None:
         st.markdown(f'<div class="metric-box"><div class="metric-label">{ikon} {label}</div><div class="metric-value">---</div></div>', unsafe_allow_html=True)
     else:
         change_class = "change-up" if degisim >= 0 else "change-down"
         change_sign = "+" if degisim >= 0 else ""
-        st.markdown(f'''<div class="metric-box">
-            <div class="metric-label">{ikon} {label}</div>
-            <div class="metric-value">{deger:,.2f}</div>
-            <div class="metric-change {change_class}">{change_sign}{degisim:.2f}%</div>
-        </div>''', unsafe_allow_html=True)
-
+        fmt = f"{deger:,.2f}" if label == "Gram Altın" else f"{deger:,.2f}"
+        st.markdown(f'<div class="metric-box"><div class="metric-label">{ikon} {label}</div><div class="metric-value">{fmt}</div><div class="metric-change {change_class}">{change_sign}{degisim:.2f}%</div></div>', unsafe_allow_html=True)
 st.markdown('</div>', unsafe_allow_html=True)
+
+# Manuel hisse sorgulama
+st.divider()
+col_man, col_btn_man = st.columns([3, 1])
+with col_man:
+    manuel_hisse = st.text_input("🔍 Harici hisse sorgula (örn: THYAO, GARAN)", placeholder="Hisse kodu yazın ve butona basın...").upper().strip()
+with col_btn_man:
+    st.write("")
+    if st.button("🔎 Sorgula", use_container_width=True) and manuel_hisse:
+        with st.spinner(f'{manuel_hisse} analiz ediliyor...'):
+            analiz = analiz_et(manuel_hisse)
+            if analiz:
+                sk = analiz['skor']
+                border_class = "skor-80" if sk>=80 else ("skor-60" if sk>=60 else "skor-diger")
+                score_class = "score-high" if sk>=80 else ("score-mid" if sk>=60 else "score-low")
+                emoji = "🔥" if sk>=80 else ("📈" if sk>=60 else "📉")
+                st.markdown(f'''<div class="stock-card {border_class}">
+                    <div>
+                        <span class="stock-name">#{analiz['hisse']}</span>
+                        <div class="stock-details">💰 {analiz['fiyat']} TL | 🎯 Alım: {analiz['ideal']} | TP: {analiz['tp']} | SL: {analiz['sl']}</div>
+                        <div class="stock-details">📊 {analiz['rsi_durum']} | Hacim: {analiz['hacim']}x | S1: {analiz['s1']} | R1: {analiz['r1']}</div>
+                    </div>
+                    <div style="text-align:right">
+                        <div class="stock-score {score_class}">{sk}</div>
+                        <div style="color:#94a3b8; font-size:13px;">{analiz['karar']} {emoji}</div>
+                    </div>
+                </div>''', unsafe_allow_html=True)
+            else:
+                st.error(f"{manuel_hisse} için veri bulunamadı.")
+
+st.divider()
 
 # Görünüm seçimi
 gorunum = st.radio("Görünüm", ["Kart", "Tablo"], horizontal=True)
@@ -292,22 +291,18 @@ with st.expander("📊 Sektör Performansları"):
     if veri['sektor_ort']:
         sdf = pd.DataFrame(list(veri['sektor_ort'].items()), columns=['Sektör','Ort. Skor'])
         st.dataframe(sdf.sort_values('Ort. Skor', ascending=False), use_container_width=True)
-    else:
-        st.write("Sektör verisi bulunamadı.")
 
 st.divider()
 
 # Hisse verileri
 if veri['sonuclar']:
     df = pd.DataFrame(veri['sonuclar'])
-    
-    c1, c2, c3 = st.columns([2, 1, 1])
-    with c1: ara = st.text_input("🔍 Hisse ara", placeholder="Kod yazın...")
-    with c2: ms = st.slider("Minimum skor", 0, 100, 60)
-    with c3:
+    col1, col2, col3 = st.columns([2, 1, 1])
+    with col1: ara = st.text_input("🔍 Listede ara", placeholder="Kod yazın...")
+    with col2: ms = st.slider("Minimum skor", 0, 100, 60)
+    with col3:
         sl = ["Tümü"] + sorted(set(HISSE_SEKTOR.get(h,"Diger") for h in df['hisse']))
         ss = st.selectbox("Sektör", sl)
-    
     if ara: df = df[df['hisse'].str.contains(ara.upper())]
     if ss != "Tümü": df = df[df['hisse'].apply(lambda h: HISSE_SEKTOR.get(h,"Diger")) == ss]
     df = df[df['skor'] >= ms]
@@ -319,10 +314,8 @@ if veri['sonuclar']:
             if sk >= 80: border_class = "skor-80"; score_class = "score-high"; emoji = "🔥"
             elif sk >= 60: border_class = "skor-60"; score_class = "score-mid"; emoji = "📈"
             else: border_class = "skor-diger"; score_class = "score-low"; emoji = "📉"
-            
             sektor = HISSE_SEKTOR.get(r['hisse'], 'Diger')
-            
-            st.markdown(f'''<div class="stock-card {border_class}">
+            card_html = f'''<div class="stock-card {border_class}">
                 <div>
                     <span class="stock-name">#{r['hisse']}</span><span class="stock-sector">{sektor}</span>
                     <div class="stock-details">💰 {r['fiyat']} TL | 🎯 İdeal Alım: {r['ideal']} | TP: {r['tp']} | SL: {r['sl']}</div>
@@ -332,15 +325,22 @@ if veri['sonuclar']:
                     <div class="stock-score {score_class}">{sk}</div>
                     <div style="color:#94a3b8; font-size:13px;">{r['karar']} {emoji}</div>
                 </div>
-            </div>''', unsafe_allow_html=True)
+            </div>'''
+            with st.container():
+                st.markdown(card_html, unsafe_allow_html=True)
+                with st.expander("📉 Mini Grafik", expanded=False):
+                    try:
+                        ticker = f"{r['hisse']}.IS"
+                        obj = yf.Ticker(ticker, session=YF)
+                        hist = _cek(obj, period="1mo")
+                        if not hist.empty:
+                            hist['Close'] = pd.to_numeric(hist['Close'])
+                            st.line_chart(hist['Close'], height=150)
+                        else:
+                            st.write("Grafik verisi çekilemedi.")
+                    except:
+                        st.write("Grafik oluşturulamadı.")
     else:
-        # Tablo görünümü için skor çubuğu ekle
-        def skor_bar(sk):
-            if sk >= 80: color = "#3b82f6"
-            elif sk >= 60: color = "#f59e0b"
-            else: color = "#6b7280"
-            return f'<div style="background:{color}; width:{sk}%; height:8px; border-radius:4px;"></div>'
-        
         display_df = df[['hisse', 'fiyat', 'skor', 'karar', 'ideal', 'tp', 'sl', 'rsi_durum', 'hacim']].copy()
         display_df.columns = ['Hisse', 'Fiyat', 'Skor', 'Karar', 'Alım', 'TP', 'SL', 'RSI', 'Hacim']
         st.dataframe(display_df, use_container_width=True, height=600)
