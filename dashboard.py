@@ -36,6 +36,10 @@ st.markdown("""
     .change-up { color: #10b981; }
     .change-down { color: #ef4444; }
     
+    /* Header */
+    .header-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .update-time { font-size: 13px; color: #64748b; text-align: right; }
+    
     /* Kartlar */
     .stock-card {
         background: #111827; border: 1px solid #1e293b; border-radius: 16px;
@@ -72,6 +76,14 @@ st.markdown("""
     
     /* Slider */
     .stSlider > div > div > div { background: #3b82f6; }
+    
+    /* Radio buttons */
+    .stRadio > div { gap: 10px; }
+    .stRadio label { color: #94a3b8; }
+    
+    /* Expander */
+    .stExpander { background: #111827; border: 1px solid #1e293b; border-radius: 12px; }
+    .stExpander header { color: #e0e6f0; font-weight: 600; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -189,8 +201,13 @@ def analiz_et(kod):
 # ==========================================
 # ARAYÜZ
 # ==========================================
-st.title("📊 BIST Radar Pro")
-st.caption("BIST Scan benzeri profesyonel piyasa izleme")
+# Header
+col_title, col_time = st.columns([3, 1])
+with col_title:
+    st.title("📊 BIST Radar Pro")
+    st.caption("BIST Scan benzeri profesyonel piyasa izleme")
+with col_time:
+    st.markdown(f'<div class="update-time">🕐 Son güncelleme:<br><b>{st.session_state.get("son_guncelleme", tr_saat())}</b></div>', unsafe_allow_html=True)
 
 # Session state
 if 'son_guncelleme' not in st.session_state:
@@ -267,16 +284,16 @@ for label, deger, degisim, ikon in metrics:
 
 st.markdown('</div>', unsafe_allow_html=True)
 
-st.markdown(f"🕐 Son güncelleme: **{st.session_state.son_guncelleme}**")
-
 # Görünüm seçimi
 gorunum = st.radio("Görünüm", ["Kart", "Tablo"], horizontal=True)
 
 # Sektör performansı
-with st.expander("📊 Sektör Performansları", expanded=False):
+with st.expander("📊 Sektör Performansları"):
     if veri['sektor_ort']:
         sdf = pd.DataFrame(list(veri['sektor_ort'].items()), columns=['Sektör','Ort. Skor'])
         st.dataframe(sdf.sort_values('Ort. Skor', ascending=False), use_container_width=True)
+    else:
+        st.write("Sektör verisi bulunamadı.")
 
 st.divider()
 
@@ -317,6 +334,13 @@ if veri['sonuclar']:
                 </div>
             </div>''', unsafe_allow_html=True)
     else:
+        # Tablo görünümü için skor çubuğu ekle
+        def skor_bar(sk):
+            if sk >= 80: color = "#3b82f6"
+            elif sk >= 60: color = "#f59e0b"
+            else: color = "#6b7280"
+            return f'<div style="background:{color}; width:{sk}%; height:8px; border-radius:4px;"></div>'
+        
         display_df = df[['hisse', 'fiyat', 'skor', 'karar', 'ideal', 'tp', 'sl', 'rsi_durum', 'hacim']].copy()
         display_df.columns = ['Hisse', 'Fiyat', 'Skor', 'Karar', 'Alım', 'TP', 'SL', 'RSI', 'Hacim']
         st.dataframe(display_df, use_container_width=True, height=600)
