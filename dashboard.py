@@ -10,20 +10,74 @@ import yfinance as yf
 import numpy as np
 from requests.adapters import HTTPAdapter
 
-st.set_page_config(page_title="BIST Radar", page_icon="🤖", layout="wide")
+st.set_page_config(page_title="BIST Radar Pro", page_icon="📈", layout="wide")
 
+# ==========================================
+# MODERN STİL - BIST SCAN BENZERİ
+# ==========================================
 st.markdown("""
 <style>
-    .stApp { background-color: #0d1117; color: white; }
-    .card { background-color: #161b22; border-radius: 12px; padding: 20px; margin: 10px 0; border: 1px solid #30363d; }
-    .skor-yuksek { color: #00d2ff; font-weight: bold; font-size: 24px; }
-    .skor-orta { color: #ffd93d; font-weight: bold; font-size: 24px; }
-    .skor-dusuk { color: #ff6b6b; font-weight: bold; font-size: 24px; }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    html, body, [class*="st-"] { font-family: 'Inter', sans-serif; }
+    .stApp { background: linear-gradient(135deg, #0b0f19 0%, #0d1525 100%); color: #e0e6f0; }
+    
+    /* Üst bilgi bandı */
+    .top-band { display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
+    .metric-box {
+        background: #111827; border: 1px solid #1e293b; border-radius: 14px;
+        padding: 14px 22px; flex: 1; min-width: 130px; text-align: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        transition: 0.2s;
+    }
+    .metric-box:hover { border-color: #3b82f6; box-shadow: 0 0 18px rgba(59,130,246,0.15); }
+    .metric-label { font-size: 12px; font-weight: 500; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; }
+    .metric-value { font-size: 22px; font-weight: 700; color: #f1f5f9; margin: 4px 0; }
+    .metric-change { font-size: 13px; font-weight: 500; }
+    .change-up { color: #10b981; }
+    .change-down { color: #ef4444; }
+    
+    /* Kartlar */
+    .stock-card {
+        background: #111827; border: 1px solid #1e293b; border-radius: 16px;
+        padding: 18px 22px; margin: 8px 0;
+        border-left: 4px solid #3b82f6;
+        display: flex; justify-content: space-between; align-items: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        transition: 0.2s;
+    }
+    .stock-card:hover { border-color: #3b82f6; box-shadow: 0 4px 16px rgba(59,130,246,0.2); }
+    .stock-card.skor-80 { border-left-color: #3b82f6; }
+    .stock-card.skor-60 { border-left-color: #f59e0b; }
+    .stock-card.skor-diger { border-left-color: #6b7280; }
+    
+    .stock-name { font-size: 18px; font-weight: 700; color: #f1f5f9; }
+    .stock-sector { font-size: 12px; color: #64748b; margin-left: 8px; }
+    .stock-details { font-size: 13px; color: #94a3b8; line-height: 1.6; }
+    .stock-score { font-size: 28px; font-weight: 700; }
+    .score-high { color: #3b82f6; }
+    .score-mid { color: #f59e0b; }
+    .score-low { color: #6b7280; }
+    
+    /* Buton */
+    .stButton > button {
+        background: #1e293b; color: #e0e6f0; border: 1px solid #334155; border-radius: 10px;
+        font-weight: 600; padding: 10px 24px; transition: 0.2s;
+    }
+    .stButton > button:hover { background: #334155; border-color: #3b82f6; }
+    
+    /* Tablo */
+    .stDataFrame { background: #111827; border: 1px solid #1e293b; border-radius: 12px; }
+    .stDataFrame th { background: #1e293b; color: #94a3b8; font-weight: 600; }
+    .stDataFrame td { color: #e0e6f0; }
+    
+    /* Slider */
+    .stSlider > div > div > div { background: #3b82f6; }
 </style>
 """, unsafe_allow_html=True)
 
-st.title("🤖 BIST Smart Radar Pro")
-
+# ==========================================
+# VERİ ÇEKME ALTYAPISI
+# ==========================================
 class DevNull:
     def write(self, msg): pass
     def flush(self): pass
@@ -37,12 +91,12 @@ class TA(HTTPAdapter):
 YF.mount("https://", TA())
 
 def _cek(obj, **kw):
-    for _ in range(3):
+    for _ in range(2):
         try:
             with contextlib.redirect_stderr(DevNull()), contextlib.redirect_stdout(DevNull()):
                 h = obj.history(**kw)
             if h is not None and not h.empty: return h
-        except: time.sleep(0.5)
+        except: time.sleep(0.3)
     return pd.DataFrame()
 
 HISSE_SEKTOR = {
@@ -57,13 +111,42 @@ def bist100_durumu():
     try:
         e = yf.Ticker("XU100.IS", session=YF)
         h = _cek(e, period="5d")
-        if h.empty or len(h) < 2: return "Veri Yok ⚪"
+        if h.empty or len(h) < 2: return None, None
         s = float(h['Close'].iloc[-1]); o = float(h['Close'].iloc[-2])
-        d = ((s-o)/o)*100
-        if d > 0.15: return f"YÜKSELİŞ 📈 (%{d:+.2f})"
-        elif d < -0.15: return f"DÜŞÜŞ 📉 (%{d:+.2f})"
-        else: return f"NÖTR ⚪ (%{d:+.2f})"
-    except: return "Veri Yok ⚪"
+        return s, ((s-o)/o)*100
+    except: return None, None
+
+def dolar_kuru():
+    try:
+        e = yf.Ticker("USDTRY=X", session=YF)
+        h = _cek(e, period="2d")
+        if h.empty or len(h) < 2: return None, None
+        s = float(h['Close'].iloc[-1]); o = float(h['Close'].iloc[-2])
+        return s, ((s-o)/o)*100
+    except: return None, None
+
+def euro_kuru():
+    try:
+        e = yf.Ticker("EURTRY=X", session=YF)
+        h = _cek(e, period="2d")
+        if h.empty or len(h) < 2: return None, None
+        s = float(h['Close'].iloc[-1]); o = float(h['Close'].iloc[-2])
+        return s, ((s-o)/o)*100
+    except: return None, None
+
+def gram_altin():
+    try:
+        ons = yf.Ticker("GC=F", session=YF)
+        h_ons = _cek(ons, period="2d")
+        usd = yf.Ticker("USDTRY=X", session=YF)
+        h_usd = _cek(usd, period="2d")
+        if h_ons.empty or h_usd.empty: return None, None
+        ons_f = float(h_ons['Close'].iloc[-1]); usd_f = float(h_usd['Close'].iloc[-1])
+        ons_o = float(h_ons['Close'].iloc[-2]); usd_o = float(h_usd['Close'].iloc[-2])
+        gram = (ons_f * usd_f) / 31.1
+        gram_o = (ons_o * usd_o) / 31.1
+        return gram, ((gram-gram_o)/gram_o)*100
+    except: return None, None
 
 def analiz_et(kod):
     t = f"{kod}.IS"
@@ -94,28 +177,42 @@ def analiz_et(kod):
         if ho>=2.0: skor+=5
         if f>d20: skor+=15
         skor=max(10,min(95,skor))
-        if skor>=80: karar="GÜÇLÜ AL 🔥"
-        elif skor>=60: karar="KADEMELİ AL 📈"
-        else: karar="DİRENÇTE BEKLE 🛑"
-        if rv>65: rd=f"Aşırı Alım 🔴 (RSI: {rv:.1f})"
-        elif rv<35: rd=f"Aşırı Satım 🟢 (RSI: {rv:.1f})"
-        else: rd=f"Nötr ⚪ (RSI: {rv:.1f})"
-        return {"hisse":kod,"fiyat":round(f,2),"skor":skor,"robot_karari":karar,"rsi_durumu":rd,"ideal_alim":round(f*0.985,2),"tp":round(f*1.08,2),"sl":round(f*0.95,2),"s1":s1,"r1":r1,"direnc20":round(d20,2),"ma10":round(ma10,2),"ma30":round(ma30,2)}
+        if skor>=80: karar="GÜÇLÜ AL"
+        elif skor>=60: karar="KADEMELİ AL"
+        else: karar="BEKLE"
+        if rv>65: rd=f"RSI {rv:.1f} 🔴"
+        elif rv<35: rd=f"RSI {rv:.1f} 🟢"
+        else: rd=f"RSI {rv:.1f} ⚪"
+        return {"hisse":kod,"fiyat":round(f,2),"skor":skor,"karar":karar,"rsi_durum":rd,"ideal":round(f*0.985,2),"tp":round(f*1.08,2),"sl":round(f*0.95,2),"s1":s1,"r1":r1,"d20":round(d20,2),"ma10":round(ma10,2),"ma30":round(ma30,2),"hacim":round(ho,1)}
     except: return None
 
+# ==========================================
+# ARAYÜZ
+# ==========================================
+st.title("📊 BIST Radar Pro")
+st.caption("BIST Scan benzeri profesyonel piyasa izleme")
+
+# Session state
 if 'son_guncelleme' not in st.session_state:
     st.session_state.son_guncelleme = tr_saat()
 if 'veri' not in st.session_state:
     st.session_state.veri = None
 
-if st.button("🔄 Verileri Anlık Çek", use_container_width=True):
-    st.session_state.son_guncelleme = tr_saat()
-    st.session_state.veri = None
-    st.rerun()
+col_btn, col_empty = st.columns([1, 3])
+with col_btn:
+    if st.button("🔄 Verileri Güncelle", use_container_width=True):
+        st.session_state.son_guncelleme = tr_saat()
+        st.session_state.veri = None
+        st.rerun()
 
+# Veri çekme
 if st.session_state.veri is None:
-    with st.spinner('📡 BIST hisseleri taranıyor...'):
-        bist100 = bist100_durumu()
+    with st.spinner('📡 Piyasa verileri alınıyor...'):
+        bist_f, bist_d = bist100_durumu()
+        usd_f, usd_d = dolar_kuru()
+        eur_f, eur_d = euro_kuru()
+        alt_f, alt_d = gram_altin()
+        
         sonuclar = []
         with ThreadPoolExecutor(max_workers=8) as ex:
             fs = {ex.submit(analiz_et, k): k for k in HISSE_LISTESI}
@@ -135,7 +232,10 @@ if st.session_state.veri is None:
         sirali = sorted(sektor_ort.items(), key=lambda x: x[1], reverse=True)
         
         st.session_state.veri = {
-            "bist100": bist100,
+            "bist_f": bist_f, "bist_d": bist_d,
+            "usd_f": usd_f, "usd_d": usd_d,
+            "eur_f": eur_f, "eur_d": eur_d,
+            "alt_f": alt_f, "alt_d": alt_d,
             "sonuclar": sonuclar,
             "sektor_ort": sektor_ort,
             "sirali": sirali
@@ -143,37 +243,82 @@ if st.session_state.veri is None:
 
 veri = st.session_state.veri
 
-col1, col2, col3 = st.columns([2,2,1])
-with col1: st.markdown(f"### 🏛️ BIST 100: {veri['bist100']}")
-with col2:
-    g = veri['sirali'][0] if veri['sirali'] else ("-",0)
-    z = veri['sirali'][-1] if veri['sirali'] else ("-",0)
-    st.markdown(f"### 🟢 {g[0]} ({g[1]})")
-    st.markdown(f"### 🔴 {z[0]} ({z[1]})")
-with col3: st.markdown(f"🕐 {st.session_state.son_guncelleme}")
+# Üst bant
+st.markdown('<div class="top-band">', unsafe_allow_html=True)
+
+metrics = [
+    ("BIST 100", veri['bist_f'], veri['bist_d'], "📈"),
+    ("USD/TRY", veri['usd_f'], veri['usd_d'], "💵"),
+    ("EUR/TRY", veri['eur_f'], veri['eur_d'], "💶"),
+    ("Gram Altın", veri['alt_f'], veri['alt_d'], "🥇"),
+]
+
+for label, deger, degisim, ikon in metrics:
+    if deger is None:
+        st.markdown(f'<div class="metric-box"><div class="metric-label">{ikon} {label}</div><div class="metric-value">---</div></div>', unsafe_allow_html=True)
+    else:
+        change_class = "change-up" if degisim >= 0 else "change-down"
+        change_sign = "+" if degisim >= 0 else ""
+        st.markdown(f'''<div class="metric-box">
+            <div class="metric-label">{ikon} {label}</div>
+            <div class="metric-value">{deger:,.2f}</div>
+            <div class="metric-change {change_class}">{change_sign}{degisim:.2f}%</div>
+        </div>''', unsafe_allow_html=True)
+
+st.markdown('</div>', unsafe_allow_html=True)
+
+st.markdown(f"🕐 Son güncelleme: **{st.session_state.son_guncelleme}**")
+
+# Görünüm seçimi
+gorunum = st.radio("Görünüm", ["Kart", "Tablo"], horizontal=True)
+
+# Sektör performansı
+with st.expander("📊 Sektör Performansları", expanded=False):
+    if veri['sektor_ort']:
+        sdf = pd.DataFrame(list(veri['sektor_ort'].items()), columns=['Sektör','Ort. Skor'])
+        st.dataframe(sdf.sort_values('Ort. Skor', ascending=False), use_container_width=True)
+
 st.divider()
 
-if veri['sektor_ort']:
-    with st.expander("📊 Sektör Performansları", expanded=False):
-        sdf = pd.DataFrame(list(veri['sektor_ort'].items()), columns=['Sektör','Skor'])
-        st.dataframe(sdf.sort_values('Skor', ascending=False), use_container_width=True)
-
+# Hisse verileri
 if veri['sonuclar']:
     df = pd.DataFrame(veri['sonuclar'])
-    c1, c2, c3, c4 = st.columns([2,1,1,1])
-    with c1: ara = st.text_input("🔍 Hisse Ara")
-    with c2: ms = st.slider("Min Skor",0,100,60)
+    
+    c1, c2, c3 = st.columns([2, 1, 1])
+    with c1: ara = st.text_input("🔍 Hisse ara", placeholder="Kod yazın...")
+    with c2: ms = st.slider("Minimum skor", 0, 100, 60)
     with c3:
         sl = ["Tümü"] + sorted(set(HISSE_SEKTOR.get(h,"Diger") for h in df['hisse']))
         ss = st.selectbox("Sektör", sl)
-    with c4: sir = st.selectbox("Sırala",["Skor ▼","Skor ▲","Fiyat ▼","Fiyat ▲"])
+    
     if ara: df = df[df['hisse'].str.contains(ara.upper())]
     if ss != "Tümü": df = df[df['hisse'].apply(lambda h: HISSE_SEKTOR.get(h,"Diger")) == ss]
     df = df[df['skor'] >= ms]
-    if "Skor" in sir: df = df.sort_values('skor', ascending="▲" in sir)
-    else: df = df.sort_values('fiyat', ascending="▲" in sir)
-    for _, r in df.iterrows():
-        sk = r['skor']; sc = "skor-yuksek" if sk>=80 else ("skor-orta" if sk>=60 else "skor-dusuk")
-        em = "🔥" if sk>=80 else ("📈" if sk>=60 else "📉")
-        st.markdown(f"""<div class="card"><div style="display:flex;justify-content:space-between"><div><h3>#{r['hisse']} {em} <small>({HISSE_SEKTOR.get(r['hisse'],'Diger')})</small></h3><p>💰 {r['fiyat']} TL | 🤖 {r['robot_karari']}</p><p>📊 {r['rsi_durumu']} | 🎯 Alım: {r['ideal_alim']} TL</p></div><div style="text-align:right"><span class="{sc}">{sk}/100</span><p>TP: {r['tp']} | SL: {r['sl']}</p><p>S1: {r['s1']} | R1: {r['r1']}</p></div></div></div>""", unsafe_allow_html=True)
-else: st.warning("Veri çekilemedi.")
+    df = df.sort_values('skor', ascending=False)
+    
+    if gorunum == "Kart":
+        for _, r in df.iterrows():
+            sk = r['skor']
+            if sk >= 80: border_class = "skor-80"; score_class = "score-high"; emoji = "🔥"
+            elif sk >= 60: border_class = "skor-60"; score_class = "score-mid"; emoji = "📈"
+            else: border_class = "skor-diger"; score_class = "score-low"; emoji = "📉"
+            
+            sektor = HISSE_SEKTOR.get(r['hisse'], 'Diger')
+            
+            st.markdown(f'''<div class="stock-card {border_class}">
+                <div>
+                    <span class="stock-name">#{r['hisse']}</span><span class="stock-sector">{sektor}</span>
+                    <div class="stock-details">💰 {r['fiyat']} TL | 🎯 İdeal Alım: {r['ideal']} | TP: {r['tp']} | SL: {r['sl']}</div>
+                    <div class="stock-details">📊 {r['rsi_durum']} | Hacim: {r['hacim']}x | S1: {r['s1']} | R1: {r['r1']}</div>
+                </div>
+                <div style="text-align:right">
+                    <div class="stock-score {score_class}">{sk}</div>
+                    <div style="color:#94a3b8; font-size:13px;">{r['karar']} {emoji}</div>
+                </div>
+            </div>''', unsafe_allow_html=True)
+    else:
+        display_df = df[['hisse', 'fiyat', 'skor', 'karar', 'ideal', 'tp', 'sl', 'rsi_durum', 'hacim']].copy()
+        display_df.columns = ['Hisse', 'Fiyat', 'Skor', 'Karar', 'Alım', 'TP', 'SL', 'RSI', 'Hacim']
+        st.dataframe(display_df, use_container_width=True, height=600)
+else:
+    st.warning("Veri çekilemedi, lütfen yenileyin.")
