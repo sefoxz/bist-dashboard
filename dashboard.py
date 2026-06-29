@@ -17,16 +17,16 @@ st.markdown("""
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
     html, body, [class*="st-"] { font-family: 'Inter', sans-serif; }
     .stApp { background: linear-gradient(135deg, #0b0f19 0%, #0d1525 100%); color: #e0e6f0; }
-    .top-band { display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
+    .top-band { display: flex; gap: 15px; margin-bottom: 15px; flex-wrap: wrap; justify-content: center; }
     .metric-box {
         background: #111827; border: 1px solid #1e293b; border-radius: 14px;
-        padding: 14px 22px; flex: 1; min-width: 130px; text-align: center;
+        padding: 10px 15px; flex: 1 1 auto; min-width: 100px; text-align: center;
         box-shadow: 0 4px 12px rgba(0,0,0,0.3); transition: 0.2s;
     }
     .metric-box:hover { border-color: #3b82f6; box-shadow: 0 0 18px rgba(59,130,246,0.15); }
-    .metric-label { font-size: 12px; font-weight: 500; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; }
-    .metric-value { font-size: 22px; font-weight: 700; color: #f1f5f9; margin: 4px 0; }
-    .metric-change { font-size: 13px; font-weight: 500; }
+    .metric-label { font-size: 11px; font-weight: 500; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; }
+    .metric-value { font-size: 18px; font-weight: 700; color: #f1f5f9; margin: 2px 0; }
+    .metric-change { font-size: 12px; font-weight: 500; }
     .change-up { color: #10b981; }
     .change-down { color: #ef4444; }
     .update-time { font-size: 13px; color: #64748b; text-align: right; }
@@ -60,7 +60,6 @@ st.markdown("""
     .stRadio > div { gap: 10px; }
     .stRadio label { color: #94a3b8; }
     .stTextInput > div > div > input { background: #111827; color: white; border: 1px solid #1e293b; border-radius: 10px; }
-    /* Sekme stilleri */
     .stTabs [data-baseweb="tab-list"] { gap: 5px; background-color: #0d1525; }
     .stTabs [data-baseweb="tab"] {
         background-color: #111827; color: #94a3b8; border-radius: 8px 8px 0 0;
@@ -235,7 +234,7 @@ if st.session_state.veri is None:
 
 veri = st.session_state.veri
 
-# Üst bant (tüm sekmelerde görünür)
+# Üst bant - mobil uyumlu
 st.markdown('<div class="top-band">', unsafe_allow_html=True)
 metrics = [
     ("BIST 100", veri['bist_f'], veri['bist_d'], "📈"),
@@ -253,39 +252,37 @@ for label, deger, degisim, ikon in metrics:
         st.markdown(f'<div class="metric-box"><div class="metric-label">{ikon} {label}</div><div class="metric-value">{fmt}</div><div class="metric-change {change_class}">{change_sign}{degisim:.2f}%</div></div>', unsafe_allow_html=True)
 st.markdown('</div>', unsafe_allow_html=True)
 
-# Manuel hisse sorgulama (tüm sekmelerde görünür)
-with st.expander("🔍 Harici Hisse Sorgula"):
-    col_man, col_btn_man = st.columns([3, 1])
-    with col_man:
-        manuel_hisse = st.text_input("Hisse kodu (örn: THYAO)", placeholder="Kodu yazın ve butona basın...", key="manuel_input").upper().strip()
-    with col_btn_man:
-        st.write("")
-        if st.button("🔎 Sorgula", use_container_width=True, key="manuel_btn") and manuel_hisse:
-            with st.spinner(f'{manuel_hisse} analiz ediliyor...'):
-                analiz = analiz_et(manuel_hisse)
-                if analiz:
-                    sk = analiz['skor']
-                    border_class = "skor-80" if sk>=80 else ("skor-60" if sk>=60 else "skor-diger")
-                    score_class = "score-high" if sk>=80 else ("score-mid" if sk>=60 else "score-low")
-                    emoji = "🔥" if sk>=80 else ("📈" if sk>=60 else "📉")
-                    st.markdown(f'''<div class="stock-card {border_class}">
-                        <div>
-                            <span class="stock-name">#{analiz['hisse']}</span>
-                            <div class="stock-details">💰 {analiz['fiyat']} TL | 🎯 Alım: {analiz['ideal']} | TP: {analiz['tp']} | SL: {analiz['sl']}</div>
-                            <div class="stock-details">📊 {analiz['rsi_durum']} | Hacim: {analiz['hacim']}x | S1: {analiz['s1']} | R1: {analiz['r1']}</div>
-                        </div>
-                        <div style="text-align:right">
-                            <div class="stock-score {score_class}">{sk}</div>
-                            <div style="color:#94a3b8; font-size:13px;">{analiz['karar']} {emoji}</div>
-                        </div>
-                    </div>''', unsafe_allow_html=True)
-                else:
-                    st.error(f"{manuel_hisse} için veri bulunamadı.")
+# Manuel hisse sorgulama - direkt açık
+st.divider()
+col_man, col_btn_man = st.columns([3, 1])
+with col_man:
+    manuel_hisse = st.text_input("🔍 Harici hisse sorgula (örn: THYAO, GARAN)", placeholder="Hisse kodu yazın ve butona basın...").upper().strip()
+with col_btn_man:
+    st.write("")
+    if st.button("🔎 Sorgula", use_container_width=True) and manuel_hisse:
+        with st.spinner(f'{manuel_hisse} analiz ediliyor...'):
+            analiz = analiz_et(manuel_hisse)
+            if analiz:
+                sk = analiz['skor']
+                border_class = "skor-80" if sk>=80 else ("skor-60" if sk>=60 else "skor-diger")
+                score_class = "score-high" if sk>=80 else ("score-mid" if sk>=60 else "score-low")
+                emoji = "🔥" if sk>=80 else ("📈" if sk>=60 else "📉")
+                st.markdown(f'''<div class="stock-card {border_class}">
+                    <div>
+                        <span class="stock-name">#{analiz['hisse']}</span>
+                        <div class="stock-details">💰 {analiz['fiyat']} TL | 🎯 Alım: {analiz['ideal']} | TP: {analiz['tp']} | SL: {analiz['sl']}</div>
+                        <div class="stock-details">📊 {analiz['rsi_durum']} | Hacim: {analiz['hacim']}x | S1: {analiz['s1']} | R1: {analiz['r1']}</div>
+                    </div>
+                    <div style="text-align:right">
+                        <div class="stock-score {score_class}">{sk}</div>
+                        <div style="color:#94a3b8; font-size:13px;">{analiz['karar']} {emoji}</div>
+                    </div>
+                </div>''', unsafe_allow_html=True)
+            else:
+                st.error(f"{manuel_hisse} için veri bulunamadı.")
 
 # Ana sekmeler
-tab1, tab2, tab3 = st.tabs(["📈 Hisseler", "📊 Sektörler", "📋 Özet"])
-
-# --- SEKMELER ---
+tab1, tab2 = st.tabs(["📈 Hisseler", "📋 Özet"])
 
 with tab1:
     gorunum = st.radio("Görünüm", ["Kart", "Tablo"], horizontal=True, key="gorunum")
@@ -328,20 +325,6 @@ with tab1:
         st.warning("Veri çekilemedi, lütfen yenileyin.")
 
 with tab2:
-    st.subheader("📊 Sektör Performansları")
-    if veri['sektor_ort']:
-        sdf = pd.DataFrame(list(veri['sektor_ort'].items()), columns=['Sektör','Ort. Skor'])
-        st.dataframe(sdf.sort_values('Ort. Skor', ascending=False), use_container_width=True)
-        
-        # En güçlü ve en zayıf sektörleri vurgula
-        if veri['sirali']:
-            col1, col2 = st.columns(2)
-            with col1:
-                st.success(f"🟢 En Güçlü: {veri['sirali'][0][0]} ({veri['sirali'][0][1]})")
-            with col2:
-                st.error(f"🔴 En Zayıf: {veri['sirali'][-1][0]} ({veri['sirali'][-1][1]})")
-
-with tab3:
     st.subheader("📋 Tarama Özeti")
     if veri['sonuclar']:
         toplam = len(veri['sonuclar'])
@@ -355,9 +338,35 @@ with tab3:
         with col3: st.metric("📈 Kademeli Al", kademeli)
         with col4: st.metric("⏸️ Bekle", bekle)
         
-        if toplam > 0:
-            basari = (guclu_al / toplam) * 100
-            st.progress(basari / 100)
-            st.caption(f"Güçlü al sinyali oranı: %{basari:.1f}")
+        # Potansiyel kar/zarar (butona basıldığı andaki fiyatlar üzerinden)
+        toplam_kar_zarar = 0.0
+        for r in veri['sonuclar']:
+            fiyat = r['fiyat']
+            ideal = r['ideal']
+            if ideal > 0:
+                yuzde = ((fiyat - ideal) / ideal) * 100
+                toplam_kar_zarar += yuzde
+        
+        st.divider()
+        st.subheader("💰 Toplam Potansiyel Getiri")
+        st.caption("*İdeal alım fiyatından alınmış olsaydı şu anki toplam kar/zarar durumu*")
+        if toplam_kar_zarar > 0:
+            st.success(f"📈 Toplam Potansiyel Kar: %{toplam_kar_zarar:.2f}")
+        elif toplam_kar_zarar < 0:
+            st.error(f"📉 Toplam Potansiyel Zarar: %{toplam_kar_zarar:.2f}")
+        else:
+            st.info("⚪ Toplam Değişim: %0.00")
+        
+        st.write("📊 Hisse Bazlı Potansiyel Kar/Zarar")
+        perf_list = []
+        for r in veri['sonuclar']:
+            fiyat = r['fiyat']
+            ideal = r['ideal']
+            if ideal > 0:
+                yuzde = ((fiyat - ideal) / ideal) * 100
+                perf_list.append({"Hisse": r['hisse'], "İdeal Alım": ideal, "Güncel": fiyat, "Fark %": round(yuzde, 2)})
+        if perf_list:
+            perf_df = pd.DataFrame(perf_list)
+            st.dataframe(perf_df, use_container_width=True, height=400)
     else:
         st.warning("Veri çekilemedi, lütfen yenileyin.")
