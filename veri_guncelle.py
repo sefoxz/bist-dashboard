@@ -40,6 +40,10 @@ AYAR = {
 
 VARSAYILAN_HISSELER = ["AEFES","AGHOL","AHGAZ","AKCNS","AKFGY","AKSA","AKSEN","ALARK","ALBRK","ALFAS","ALGYO","ARDYZ","ARENA","ASTOR","BERA","BOBET","BRSAN","BRYAT","BUCIM","CANTE","CATES","CCOLA","CIMSA","CWENE","DEVA","DOAS","ECILC","EGEEN","ENJSA","EUPWR","EURPN","FENER","FORTE","GENIL","GESAN","GLYHO","GSDHO","GUBRF","GWIND","HATSN","HEKTS","INDES","INFO","ISGYO","ISMEN","IZENR","KARSN","KCAER","KONTR","KONYA","KORDS","MAVI","MIATK","MPARK","OYAKC","POLHO","QUAGR","REEDR","RYSAS","SAYAS","SDTTR","SMRTG","SOKM","TSKB","TTRAK","VESBE","VESTL","YEOTK","ZOREN","ADEL","ALCAR","ANHYT","AVOD","AYDEM","BAYRK","BJKAS","CEMTS","CLEBI","COSMO","DAPGM","DESA","DGATE","EDATA","ERBOS","ESCOM","FLAP","FONET","GOODY","HUNER","IHGZT","INVEO","IPEKE","KARTN","KERVT","KLNMA","KRVGD","KUYAS","LIDER","LKMNH","MARTI","MEGAP","MERIT","MTRKS","NATEN","NUHCM","PAPIL","PEKGY","PLTUR","PRZMA","PSGYO","RODRG","RTALB","SANFM","SELGD","SILVR","SMART","SNGYO","TABGD","TDGYO","TGSAS","TMSN","TSPOR","ULKER","UZERB","VERTU","VKING","YATAS","YUNSA"]
 
+HISSE_SEKTOR = {
+    "AEFES": "Gida", "AGHOL": "Holding", "AHGAZ": "Enerji", "AKCNS": "Cimento", "AKFGY": "Gyo", "AKSA": "Kimya", "AKSEN": "Enerji", "ALARK": "Holding", "ALBRK": "Banka", "ALFAS": "Enerji", "ALGYO": "Gyo", "ARDYZ": "Teknoloji", "ARENA": "Teknoloji", "ASTOR": "Enerji", "BERA": "Gida", "BOBET": "Kimya", "BRSAN": "DemirCelik", "BRYAT": "DemirCelik", "BUCIM": "Cimento", "CANTE": "Cimento", "CATES": "Enerji", "CCOLA": "Gida", "CIMSA": "Cimento", "CWENE": "Enerji", "DEVA": "Ilac", "DOAS": "Otomotiv", "ECILC": "DemirCelik", "EGEEN": "Tekstil", "ENJSA": "Enerji", "EUPWR": "Enerji", "EURPN": "Tekstil", "FENER": "Spor", "FORTE": "Teknoloji", "GENIL": "Enerji", "GESAN": "Enerji", "GLYHO": "Gyo", "GSDHO": "Holding", "GUBRF": "Kimya", "GWIND": "Enerji", "HATSN": "Teknoloji", "HEKTS": "Teknoloji", "INDES": "Teknoloji", "INFO": "Teknoloji", "ISGYO": "Gyo", "ISMEN": "Gyo", "IZENR": "Enerji", "KARSN": "Otomotiv", "KCAER": "DemirCelik", "KONTR": "Savunma", "KONYA": "Cimento", "KORDS": "Tekstil", "MAVI": "Tekstil", "MIATK": "Teknoloji", "MPARK": "Saglik", "OYAKC": "Cimento", "POLHO": "Kimya", "QUAGR": "Gida", "REEDR": "Teknoloji", "RYSAS": "Teknoloji", "SAYAS": "Enerji", "SDTTR": "Savunma", "SMRTG": "Teknoloji", "SOKM": "Perakende", "TSKB": "Banka", "TTRAK": "Otomotiv", "VESBE": "Otomotiv", "VESTL": "BeyazEsya", "YEOTK": "Enerji", "ZOREN": "Enerji", "ADEL": "Kimya", "ALCAR": "Otomotiv", "ANHYT": "Sigorta", "AVOD": "Gida", "AYDEM": "Enerji", "BAYRK": "Tekstil", "BJKAS": "Spor", "CEMTS": "Cimento", "CLEBI": "Ulastirma", "COSMO": "Teknoloji", "DAPGM": "Gida", "DESA": "Tekstil", "DGATE": "Teknoloji", "EDATA": "Teknoloji", "ERBOS": "DemirCelik", "ESCOM": "Teknoloji", "FLAP": "Enerji", "FONET": "Teknoloji", "GOODY": "Gida", "HUNER": "Teknoloji", "IHGZT": "Medya", "INVEO": "Gida", "IPEKE": "Teknoloji", "KARTN": "Kagit", "KERVT": "Gida", "KLNMA": "Kimya", "KRVGD": "Teknoloji", "KUYAS": "DemirCelik", "LIDER": "Teknoloji", "LKMNH": "Kimya", "MARTI": "Turizm", "MEGAP": "Enerji", "MERIT": "Savunma", "MTRKS": "Teknoloji", "NATEN": "Enerji", "NUHCM": "Cimento", "PAPIL": "Savunma", "PEKGY": "Gyo", "PLTUR": "Ulastirma", "PRZMA": "Enerji", "PSGYO": "Gyo", "RODRG": "Enerji", "RTALB": "Gida", "SANFM": "Enerji", "SELGD": "Gida", "SILVR": "Teknoloji", "SMART": "Teknoloji", "SNGYO": "Gyo", "TABGD": "Gida", "TDGYO": "Gyo", "TGSAS": "Kimya", "TMSN": "DemirCelik", "TSPOR": "Spor", "ULKER": "Gida", "UZERB": "Gida", "VERTU": "Enerji", "VKING": "Enerji", "YATAS": "Tekstil", "YUNSA": "Tekstil"
+}
+
 YF_OTURUMU = requests.Session()
 YF_OTURUMU.headers.update({"User-Agent": "Mozilla/5.0","Accept-Language": "tr-TR,tr;q=0.9"})
 
@@ -157,7 +161,8 @@ def hisse_analiz_et(ticker_sembol):
             "skor": skor, "robot_karari": robot_karari, "rsi_durumu": rsi_durumu,
             "ideal_alim": ideal_alim, "tp": tp_seviyesi, "sl": sl_seviyesi,
             "s1": s1, "r1": r1, "direnc20": round(direnc20, 2),
-            "ma10": round(ma10, 2), "ma30": round(ma30, 2)
+            "ma10": round(ma10, 2), "ma30": round(ma30, 2),
+            "rsi_deger": round(guncel_rsi, 1), "hacim_orani": round(hacim_orani, 1)
         }
     except: return None
 
@@ -178,9 +183,33 @@ def veri_guncelle():
             except: pass
     finally: executor.shutdown(wait=False)
     tum.sort(key=lambda x: x["skor"], reverse=True)
+    
+    # Sektör bazlı ortalama skor hesapla
+    sektor_skorlar = {}
+    sektor_sayilar = {}
+    for h in tum:
+        sektor = HISSE_SEKTOR.get(h["hisse"], "Diger")
+        sektor_skorlar[sektor] = sektor_skorlar.get(sektor, 0) + h["skor"]
+        sektor_sayilar[sektor] = sektor_sayilar.get(sektor, 0) + 1
+    
+    sektor_ortalamalar = {}
+    for s in sektor_skorlar:
+        sektor_ortalamalar[s] = round(sektor_skorlar[s] / sektor_sayilar[s], 1)
+    
+    # En güçlü ve en zayıf sektörleri bul
+    sirali_sektorler = sorted(sektor_ortalamalar.items(), key=lambda x: x[1], reverse=True)
+    
     with open(VERI_DOSYASI, "w", encoding="utf-8") as f:
-        json.dump({"son_guncelleme": datetime.now().strftime("%d.%m.%Y %H:%M"), "bist100_durum": bist100, "toplam_hisse": len(tum), "hisseler": tum[:MAX_HISSE]}, f, ensure_ascii=False, indent=2)
-    print(f"✅ {len(tum)} hisse güncellendi.")
+        json.dump({
+            "son_guncelleme": datetime.now().strftime("%d.%m.%Y %H:%M"),
+            "bist100_durum": bist100,
+            "toplam_hisse": len(tum),
+            "hisseler": tum[:MAX_HISSE],
+            "sektor_ortalamalar": sektor_ortalamalar,
+            "en_guclu_sektor": sirali_sektorler[0] if sirali_sektorler else ("-", 0),
+            "en_zayif_sektor": sirali_sektorler[-1] if sirali_sektorler else ("-", 0)
+        }, f, ensure_ascii=False, indent=2)
+    print(f"✅ {len(tum)} hisse güncellendi. En güçlü sektör: {sirali_sektorler[0] if sirali_sektorler else '-'}")
 
 if __name__ == "__main__":
     veri_guncelle()
