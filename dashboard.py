@@ -3,10 +3,10 @@ import pandas as pd
 import json
 import os
 from datetime import datetime
+from veri_guncelle import HISSE_SEKTOR  # Eksik import eklendi
 
 st.set_page_config(page_title="BIST Smart Radar Pro", page_icon="🤖", layout="wide")
 
-# Koyu/Açık tema otomatik
 st.markdown("""
 <style>
     .stApp { background-color: #0d1117; color: white; }
@@ -26,7 +26,6 @@ if os.path.exists(VERI_DOSYASI):
     with open(VERI_DOSYASI, "r", encoding="utf-8") as f:
         veri = json.load(f)
     
-    # Üst bilgi çubuğu
     col1, col2, col3 = st.columns([2, 2, 1])
     with col1:
         st.markdown(f"### 🏛️ BIST 100: {veri.get('bist100_durum', 'Veri Yok')}")
@@ -42,7 +41,6 @@ if os.path.exists(VERI_DOSYASI):
     
     st.divider()
     
-    # Sektör performansı tablosu
     sektorler = veri.get('sektor_ortalamalar', {})
     if sektorler:
         with st.expander("📊 Sektör Performansları", expanded=False):
@@ -50,12 +48,10 @@ if os.path.exists(VERI_DOSYASI):
             sektor_df = sektor_df.sort_values('Ortalama Skor', ascending=False)
             st.dataframe(sektor_df, use_container_width=True)
     
-    # Hisse verileri
     hisseler = veri.get("hisseler", [])
     if hisseler:
         df = pd.DataFrame(hisseler)
         
-        # Filtreler
         col1, col2, col3, col4 = st.columns([2, 1, 1, 1])
         with col1:
             arama = st.text_input("🔍 Hisse Ara", placeholder="Hisse kodu...")
@@ -67,7 +63,6 @@ if os.path.exists(VERI_DOSYASI):
         with col4:
             siralama = st.selectbox("Sırala", ["Skor ▼", "Skor ▲", "Fiyat ▼", "Fiyat ▲"])
         
-        # Filtreleme
         if arama: df = df[df['hisse'].str.contains(arama.upper())]
         if secili_sektor != "Tümü":
             df = df[df['hisse'].apply(lambda h: HISSE_SEKTOR.get(h, "Diger")) == secili_sektor]
@@ -78,7 +73,6 @@ if os.path.exists(VERI_DOSYASI):
         else:
             df = df.sort_values('fiyat', ascending="▲" in siralama)
         
-        # Kartlar
         for _, row in df.iterrows():
             skor = row['skor']
             skor_class = "skor-yuksek" if skor >= 80 else ("skor-orta" if skor >= 60 else "skor-dusuk")
