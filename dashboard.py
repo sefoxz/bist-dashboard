@@ -99,60 +99,79 @@ def analiz_et(kod):
         return {"hisse":kod,"fiyat":round(f,2),"skor":skor,"robot_karari":karar,"rsi_durumu":rd,"ideal_alim":round(f*0.985,2),"tp":round(f*1.08,2),"sl":round(f*0.95,2),"s1":s1,"r1":r1,"direnc20":round(d20,2),"ma10":round(ma10,2),"ma30":round(ma30,2)}
     except: return None
 
+# Session state ile yenileme kontrolü
+if 'son_guncelleme' not in st.session_state:
+    st.session_state.son_guncelleme = datetime.now().strftime('%d.%m.%Y %H:%M:%S')
+if 'veri' not in st.session_state:
+    st.session_state.veri = None
+
 if st.button("🔄 Verileri Anlık Çek", use_container_width=True):
+    st.session_state.son_guncelleme = datetime.now().strftime('%d.%m.%Y %H:%M:%S')
+    st.session_state.veri = None  # Cache'i temizle
     st.rerun()
 
-with st.spinner('📡 BIST hisseleri taranıyor...'):
-    bist100 = bist100_durumu()
-    sonuclar = []
-    with ThreadPoolExecutor(max_workers=8) as ex:
-        fs = {ex.submit(analiz_et, k): k for k in HISSE_LISTESI}
-        for f in fs:
-            try:
-                a = f.result()
-                if a: sonuclar.append(a)
-            except: pass
-    sonuclar.sort(key=lambda x: x["skor"], reverse=True)
-    
-    skorlar, sayilar = {}, {}
-    for a in sonuclar:
-        s = HISSE_SEKTOR.get(a["hisse"],"Diger")
-        skorlar[s] = skorlar.get(s,0)+a["skor"]
-        sayilar[s] = sayilar.get(s,0)+1
-    sektor_ort = {s: round(skorlar[s]/sayilar[s],1) for s in skorlar}
-    sirali = sorted(sektor_ort.items(), key=lambda x: x[1], reverse=True)
-    
-    col1, col2, col3 = st.columns([2,2,1])
-    with col1: st.markdown(f"### 🏛️ BIST 100: {bist100}")
-    with col2:
-        g = sirali[0] if sirali else ("-",0)
-        z = sirali[-1] if sirali else ("-",0)
-        st.markdown(f"### 🟢 {g[0]} ({g[1]})")
-        st.markdown(f"### 🔴 {z[0]} ({z[1]})")
-    with col3: st.markdown(f"🕐 {datetime.now().strftime('%d.%m.%Y %H:%M:%S')}")
-    st.divider()
-    
-    if sektor_ort:
-        with st.expander("📊 Sektör Performansları", expanded=False):
-            sdf = pd.DataFrame(list(sektor_ort.items()), columns=['Sektör','Skor'])
-            st.dataframe(sdf.sort_values('Skor', ascending=False), use_container_width=True)
-    
-    if sonuclar:
-        df = pd.DataFrame(sonuclar)
-        c1, c2, c3, c4 = st.columns([2,1,1,1])
-        with c1: ara = st.text_input("🔍 Hisse Ara")
-        with c2: ms = st.slider("Min Skor",0,100,60)
-        with c3:
-            sl = ["Tümü"] + sorted(set(HISSE_SEKTOR.get(h,"Diger") for h in df['hisse']))
-            ss = st.selectbox("Sektör", sl)
-        with c4: sir = st.selectbox("Sırala",["Skor ▼","Skor ▲","Fiyat ▼","Fiyat ▲"])
-        if ara: df = df[df['hisse'].str.contains(ara.upper())]
-        if ss != "Tümü": df = df[df['hisse'].apply(lambda h: HISSE_SEKTOR.get(h,"Diger")) == ss]
-        df = df[df['skor'] >= ms]
-        if "Skor" in sir: df = df.sort_values('skor', ascending="▲" in sir)
-        else: df = df.sort_values('fiyat', ascending="▲" in sir)
-        for _, r in df.iterrows():
-            sk = r['skor']; sc = "skor-yuksek" if sk>=80 else ("skor-orta" if sk>=60 else "skor-dusuk")
-            em = "🔥" if sk>=80 else ("📈" if sk>=60 else "📉")
-            st.markdown(f"""<div class="card"><div style="display:flex;justify-content:space-between"><div><h3>#{r['hisse']} {em} <small>({HISSE_SEKTOR.get(r['hisse'],'Diger')})</small></h3><p>💰 {r['fiyat']} TL | 🤖 {r['robot_karari']}</p><p>📊 {r['rsi_durumu']} | 🎯 Alım: {r['ideal_alim']} TL</p></div><div style="text-align:right"><span class="{sc}">{sk}/100</span><p>TP: {r['tp']} | SL: {r['sl']}</p><p>S1: {r['s1']} | R1: {r['r1']}</p></div></div></div>""", unsafe_allow_html=True)
-    else: st.warning("Veri çekilemedi.")
+# Veri yoksa veya butona basıldıysa yeniden çek
+if st.session_state.veri is None:
+    with st.spinner('📡 BIST hisseleri taranıyor...'):
+        bist100 = bist100_durumu()
+        sonuclar = []
+        with ThreadPoolExecutor(max_workers=8) as ex:
+            fs = {ex.submit(analiz_et, k): k for k in HISSE_LISTESI}
+            for f in fs:
+                try:
+                    a = f.result()
+                    if a: sonuclar.append(a)
+                except: pass
+        sonuclar.sort(key=lambda x: x["skor"], reverse=True)
+        
+        skorlar, sayilar = {}, {}
+        for a in sonuclar:
+            s = HISSE_SEKTOR.get(a["hisse"],"Diger")
+            skorlar[s] = skorlar.get(s,0)+a["skor"]
+            sayilar[s] = sayilar.get(s,0)+1
+        sektor_ort = {s: round(skorlar[s]/sayilar[s],1) for s in skorlar}
+        sirali = sorted(sektor_ort.items(), key=lambda x: x[1], reverse=True)
+        
+        st.session_state.veri = {
+            "bist100": bist100,
+            "sonuclar": sonuclar,
+            "sektor_ort": sektor_ort,
+            "sirali": sirali
+        }
+
+veri = st.session_state.veri
+
+col1, col2, col3 = st.columns([2,2,1])
+with col1: st.markdown(f"### 🏛️ BIST 100: {veri['bist100']}")
+with col2:
+    g = veri['sirali'][0] if veri['sirali'] else ("-",0)
+    z = veri['sirali'][-1] if veri['sirali'] else ("-",0)
+    st.markdown(f"### 🟢 {g[0]} ({g[1]})")
+    st.markdown(f"### 🔴 {z[0]} ({z[1]})")
+with col3: st.markdown(f"🕐 {st.session_state.son_guncelleme}")
+st.divider()
+
+if veri['sektor_ort']:
+    with st.expander("📊 Sektör Performansları", expanded=False):
+        sdf = pd.DataFrame(list(veri['sektor_ort'].items()), columns=['Sektör','Skor'])
+        st.dataframe(sdf.sort_values('Skor', ascending=False), use_container_width=True)
+
+if veri['sonuclar']:
+    df = pd.DataFrame(veri['sonuclar'])
+    c1, c2, c3, c4 = st.columns([2,1,1,1])
+    with c1: ara = st.text_input("🔍 Hisse Ara")
+    with c2: ms = st.slider("Min Skor",0,100,60)
+    with c3:
+        sl = ["Tümü"] + sorted(set(HISSE_SEKTOR.get(h,"Diger") for h in df['hisse']))
+        ss = st.selectbox("Sektör", sl)
+    with c4: sir = st.selectbox("Sırala",["Skor ▼","Skor ▲","Fiyat ▼","Fiyat ▲"])
+    if ara: df = df[df['hisse'].str.contains(ara.upper())]
+    if ss != "Tümü": df = df[df['hisse'].apply(lambda h: HISSE_SEKTOR.get(h,"Diger")) == ss]
+    df = df[df['skor'] >= ms]
+    if "Skor" in sir: df = df.sort_values('skor', ascending="▲" in sir)
+    else: df = df.sort_values('fiyat', ascending="▲" in sir)
+    for _, r in df.iterrows():
+        sk = r['skor']; sc = "skor-yuksek" if sk>=80 else ("skor-orta" if sk>=60 else "skor-dusuk")
+        em = "🔥" if sk>=80 else ("📈" if sk>=60 else "📉")
+        st.markdown(f"""<div class="card"><div style="display:flex;justify-content:space-between"><div><h3>#{r['hisse']} {em} <small>({HISSE_SEKTOR.get(r['hisse'],'Diger')})</small></h3><p>💰 {r['fiyat']} TL | 🤖 {r['robot_karari']}</p><p>📊 {r['rsi_durumu']} | 🎯 Alım: {r['ideal_alim']} TL</p></div><div style="text-align:right"><span class="{sc}">{sk}/100</span><p>TP: {r['tp']} | SL: {r['sl']}</p><p>S1: {r['s1']} | R1: {r['r1']}</p></div></div></div>""", unsafe_allow_html=True)
+else: st.warning("Veri çekilemedi.")
