@@ -57,8 +57,6 @@ st.markdown("""
     .stDataFrame th { background: #1e293b; color: #94a3b8; font-weight: 600; }
     .stDataFrame td { color: #e0e6f0; }
     .stSlider > div > div > div { background: #3b82f6; }
-    .stRadio > div { gap: 10px; }
-    .stRadio label { color: #94a3b8; }
     .stTextInput > div > div > input { background: #111827; color: white; border: 1px solid #1e293b; border-radius: 10px; }
     .stTabs [data-baseweb="tab-list"] { gap: 5px; background-color: #0d1525; }
     .stTabs [data-baseweb="tab"] {
@@ -234,12 +232,12 @@ if st.session_state.veri is None:
 
 veri = st.session_state.veri
 
-# Üst bant - mobil uyumlu
+# Üst bant
 st.markdown('<div class="top-band">', unsafe_allow_html=True)
 metrics = [
     ("BIST 100", veri['bist_f'], veri['bist_d'], "📈"),
-    ("USD/TRY", veri['usd_f'], veri['usd_d'], "💵"),
-    ("EUR/TRY", veri['eur_f'], veri['eur_d'], "💶"),
+    ("USD/TL", veri['usd_f'], veri['usd_d'], "💵"),
+    ("EUR/TL", veri['eur_f'], veri['eur_d'], "💶"),
     ("Gram Altın", veri['alt_f'], veri['alt_d'], "🥇"),
 ]
 for label, deger, degisim, ikon in metrics:
@@ -252,7 +250,7 @@ for label, deger, degisim, ikon in metrics:
         st.markdown(f'<div class="metric-box"><div class="metric-label">{ikon} {label}</div><div class="metric-value">{fmt}</div><div class="metric-change {change_class}">{change_sign}{degisim:.2f}%</div></div>', unsafe_allow_html=True)
 st.markdown('</div>', unsafe_allow_html=True)
 
-# Manuel hisse sorgulama - direkt açık
+# Manuel hisse sorgulama
 st.divider()
 col_man, col_btn_man = st.columns([3, 1])
 with col_man:
@@ -285,7 +283,6 @@ with col_btn_man:
 tab1, tab2 = st.tabs(["📈 Hisseler", "📋 Özet"])
 
 with tab1:
-    gorunum = st.radio("Görünüm", ["Kart", "Tablo"], horizontal=True, key="gorunum")
     if veri['sonuclar']:
         df = pd.DataFrame(veri['sonuclar'])
         col1, col2, col3 = st.columns([2, 1, 1])
@@ -299,28 +296,23 @@ with tab1:
         df = df[df['skor'] >= ms]
         df = df.sort_values('skor', ascending=False)
         
-        if gorunum == "Kart":
-            for _, r in df.iterrows():
-                sk = r['skor']
-                if sk >= 80: border_class = "skor-80"; score_class = "score-high"; emoji = "🔥"
-                elif sk >= 60: border_class = "skor-60"; score_class = "score-mid"; emoji = "📈"
-                else: border_class = "skor-diger"; score_class = "score-low"; emoji = "📉"
-                sektor = HISSE_SEKTOR.get(r['hisse'], 'Diger')
-                st.markdown(f'''<div class="stock-card {border_class}">
-                    <div>
-                        <span class="stock-name">#{r['hisse']}</span><span class="stock-sector">{sektor}</span>
-                        <div class="stock-details">💰 {r['fiyat']} TL | 🎯 İdeal Alım: {r['ideal']} | TP: {r['tp']} | SL: {r['sl']}</div>
-                        <div class="stock-details">📊 {r['rsi_durum']} | Hacim: {r['hacim']}x | S1: {r['s1']} | R1: {r['r1']}</div>
-                    </div>
-                    <div style="text-align:right">
-                        <div class="stock-score {score_class}">{sk}</div>
-                        <div style="color:#94a3b8; font-size:13px;">{r['karar']} {emoji}</div>
-                    </div>
-                </div>''', unsafe_allow_html=True)
-        else:
-            display_df = df[['hisse', 'fiyat', 'skor', 'karar', 'ideal', 'tp', 'sl', 'rsi_durum', 'hacim']].copy()
-            display_df.columns = ['Hisse', 'Fiyat', 'Skor', 'Karar', 'Alım', 'TP', 'SL', 'RSI', 'Hacim']
-            st.dataframe(display_df, use_container_width=True, height=600)
+        for _, r in df.iterrows():
+            sk = r['skor']
+            if sk >= 80: border_class = "skor-80"; score_class = "score-high"; emoji = "🔥"
+            elif sk >= 60: border_class = "skor-60"; score_class = "score-mid"; emoji = "📈"
+            else: border_class = "skor-diger"; score_class = "score-low"; emoji = "📉"
+            sektor = HISSE_SEKTOR.get(r['hisse'], 'Diger')
+            st.markdown(f'''<div class="stock-card {border_class}">
+                <div>
+                    <span class="stock-name">#{r['hisse']}</span><span class="stock-sector">{sektor}</span>
+                    <div class="stock-details">💰 {r['fiyat']} TL | 🎯 İdeal Alım: {r['ideal']} | TP: {r['tp']} | SL: {r['sl']}</div>
+                    <div class="stock-details">📊 {r['rsi_durum']} | Hacim: {r['hacim']}x | S1: {r['s1']} | R1: {r['r1']}</div>
+                </div>
+                <div style="text-align:right">
+                    <div class="stock-score {score_class}">{sk}</div>
+                    <div style="color:#94a3b8; font-size:13px;">{r['karar']} {emoji}</div>
+                </div>
+            </div>''', unsafe_allow_html=True)
     else:
         st.warning("Veri çekilemedi, lütfen yenileyin.")
 
@@ -338,7 +330,7 @@ with tab2:
         with col3: st.metric("📈 Kademeli Al", kademeli)
         with col4: st.metric("⏸️ Bekle", bekle)
         
-        # Potansiyel kar/zarar (butona basıldığı andaki fiyatlar üzerinden)
+        # Anlık kar/zarar toplamı
         toplam_kar_zarar = 0.0
         for r in veri['sonuclar']:
             fiyat = r['fiyat']
@@ -348,16 +340,16 @@ with tab2:
                 toplam_kar_zarar += yuzde
         
         st.divider()
-        st.subheader("💰 Toplam Potansiyel Getiri")
-        st.caption("*İdeal alım fiyatından alınmış olsaydı şu anki toplam kar/zarar durumu*")
+        st.subheader("💰 Toplam Kar/Zarar")
+        st.caption("*İdeal alım fiyatına göre anlık fark toplamıdır, gerçekleşen işlemleri göstermez.*")
         if toplam_kar_zarar > 0:
-            st.success(f"📈 Toplam Potansiyel Kar: %{toplam_kar_zarar:.2f}")
+            st.success(f"📈 Toplam Kar: %{toplam_kar_zarar:.2f}")
         elif toplam_kar_zarar < 0:
-            st.error(f"📉 Toplam Potansiyel Zarar: %{toplam_kar_zarar:.2f}")
+            st.error(f"📉 Toplam Zarar: %{toplam_kar_zarar:.2f}")
         else:
             st.info("⚪ Toplam Değişim: %0.00")
         
-        st.write("📊 Hisse Bazlı Potansiyel Kar/Zarar")
+        st.write("📊 Hisse Bazlı Fark")
         perf_list = []
         for r in veri['sonuclar']:
             fiyat = r['fiyat']
