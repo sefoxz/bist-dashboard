@@ -64,9 +64,10 @@ st.markdown("""
     .stExpander header { color: #e0e6f0; font-weight: 600; }
     .stTextInput > div > div > input { background: #111827; color: white; border: 1px solid #1e293b; border-radius: 10px; }
 
-    /* Sektör expander okları için düzeltme */
-    .stExpander svg { display: none; }
-    .stExpander .st-cb { color: #e0e6f0; }
+    /* Sektör expander okları için KALICI çözüm */
+    details > summary { list-style: none; }
+    details > summary::-webkit-details-marker { display: none; }
+    details > summary::marker { display: none; content: ""; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -129,11 +130,16 @@ def euro_kuru():
 
 def gram_altin():
     try:
-        e = yf.Ticker("GAUTRY=X", session=YF)
-        h = _cek(e, period="2d")
-        if h.empty or len(h) < 2: return None, None
-        s = float(h['Close'].iloc[-1]); o = float(h['Close'].iloc[-2])
-        return s, ((s-o)/o)*100
+        ons = yf.Ticker("GC=F", session=YF)
+        h_ons = _cek(ons, period="2d")
+        usd = yf.Ticker("USDTRY=X", session=YF)
+        h_usd = _cek(usd, period="2d")
+        if h_ons.empty or len(h_ons) < 2 or h_usd.empty or len(h_usd) < 2: return None, None
+        ons_f = float(h_ons['Close'].iloc[-1]); usd_f = float(h_usd['Close'].iloc[-1])
+        ons_o = float(h_ons['Close'].iloc[-2]); usd_o = float(h_usd['Close'].iloc[-2])
+        gram_f = (ons_f * usd_f) / 31.1035
+        gram_o = (ons_o * usd_o) / 31.1035
+        return gram_f, ((gram_f - gram_o) / gram_o) * 100
     except: return None, None
 
 def analiz_et(kod):
@@ -237,7 +243,7 @@ for label, deger, degisim, ikon in metrics:
     else:
         change_class = "change-up" if degisim >= 0 else "change-down"
         change_sign = "+" if degisim >= 0 else ""
-        fmt = f"{deger:,.2f}" if label == "Gram Altın" else f"{deger:,.2f}"
+        fmt = f"{deger:,.2f}"
         st.markdown(f'<div class="metric-box"><div class="metric-label">{ikon} {label}</div><div class="metric-value">{fmt}</div><div class="metric-change {change_class}">{change_sign}{degisim:.2f}%</div></div>', unsafe_allow_html=True)
 st.markdown('</div>', unsafe_allow_html=True)
 
@@ -271,11 +277,8 @@ with col_btn_man:
                 st.error(f"{manuel_hisse} için veri bulunamadı.")
 
 st.divider()
-
-# Görünüm seçimi
 gorunum = st.radio("Görünüm", ["Kart", "Tablo"], horizontal=True)
 
-# Sektör performansı
 with st.expander("📊 Sektör Performansları"):
     if veri['sektor_ort']:
         sdf = pd.DataFrame(list(veri['sektor_ort'].items()), columns=['Sektör','Ort. Skor'])
@@ -283,7 +286,6 @@ with st.expander("📊 Sektör Performansları"):
 
 st.divider()
 
-# Hisse verileri
 if veri['sonuclar']:
     df = pd.DataFrame(veri['sonuclar'])
     col1, col2, col3 = st.columns([2, 1, 1])
