@@ -3,6 +3,7 @@ import pandas as pd
 import time
 import requests
 import contextlib
+import pytz
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor
 import yfinance as yf
@@ -48,6 +49,9 @@ HISSE_SEKTOR = {
     "AEFES": "Gida", "AGHOL": "Holding", "AHGAZ": "Enerji", "AKCNS": "Cimento", "AKFGY": "Gyo", "AKSA": "Kimya", "AKSEN": "Enerji", "ALARK": "Holding", "ALBRK": "Banka", "ALFAS": "Enerji", "ALGYO": "Gyo", "ARDYZ": "Teknoloji", "ARENA": "Teknoloji", "ASTOR": "Enerji", "BERA": "Gida", "BOBET": "Kimya", "BRSAN": "DemirCelik", "BRYAT": "DemirCelik", "BUCIM": "Cimento", "CANTE": "Cimento", "CATES": "Enerji", "CCOLA": "Gida", "CIMSA": "Cimento", "CWENE": "Enerji", "DEVA": "Ilac", "DOAS": "Otomotiv", "ECILC": "DemirCelik", "EGEEN": "Tekstil", "ENJSA": "Enerji", "EUPWR": "Enerji", "EURPN": "Tekstil", "FENER": "Spor", "FORTE": "Teknoloji", "GENIL": "Enerji", "GESAN": "Enerji", "GLYHO": "Gyo", "GSDHO": "Holding", "GUBRF": "Kimya", "GWIND": "Enerji", "HATSN": "Teknoloji", "HEKTS": "Teknoloji", "INDES": "Teknoloji", "INFO": "Teknoloji", "ISGYO": "Gyo", "ISMEN": "Gyo", "IZENR": "Enerji", "KARSN": "Otomotiv", "KCAER": "DemirCelik", "KONTR": "Savunma", "KONYA": "Cimento", "KORDS": "Tekstil", "MAVI": "Tekstil", "MIATK": "Teknoloji", "MPARK": "Saglik", "OYAKC": "Cimento", "POLHO": "Kimya", "QUAGR": "Gida", "REEDR": "Teknoloji", "RYSAS": "Teknoloji", "SAYAS": "Enerji", "SDTTR": "Savunma", "SMRTG": "Teknoloji", "SOKM": "Perakende", "TSKB": "Banka", "TTRAK": "Otomotiv", "VESBE": "Otomotiv", "VESTL": "BeyazEsya", "YEOTK": "Enerji", "ZOREN": "Enerji", "ADEL": "Kimya", "ALCAR": "Otomotiv", "ANHYT": "Sigorta", "AVOD": "Gida", "AYDEM": "Enerji", "BAYRK": "Tekstil", "BJKAS": "Spor", "CEMTS": "Cimento", "CLEBI": "Ulastirma", "COSMO": "Teknoloji", "DAPGM": "Gida", "DESA": "Tekstil", "DGATE": "Teknoloji", "EDATA": "Teknoloji", "ERBOS": "DemirCelik", "ESCOM": "Teknoloji", "FLAP": "Enerji", "FONET": "Teknoloji", "GOODY": "Gida", "HUNER": "Teknoloji", "IHGZT": "Medya", "INVEO": "Gida", "IPEKE": "Teknoloji", "KARTN": "Kagit", "KERVT": "Gida", "KLNMA": "Kimya", "KRVGD": "Teknoloji", "KUYAS": "DemirCelik", "LIDER": "Teknoloji", "LKMNH": "Kimya", "MARTI": "Turizm", "MEGAP": "Enerji", "MERIT": "Savunma", "MTRKS": "Teknoloji", "NATEN": "Enerji", "NUHCM": "Cimento", "PAPIL": "Savunma", "PEKGY": "Gyo", "PLTUR": "Ulastirma", "PRZMA": "Enerji", "PSGYO": "Gyo", "RODRG": "Enerji", "RTALB": "Gida", "SANFM": "Enerji", "SELGD": "Gida", "SILVR": "Teknoloji", "SMART": "Teknoloji", "SNGYO": "Gyo", "TABGD": "Gida", "TDGYO": "Gyo", "TGSAS": "Kimya", "TMSN": "DemirCelik", "TSPOR": "Spor", "ULKER": "Gida", "UZERB": "Gida", "VERTU": "Enerji", "VKING": "Enerji", "YATAS": "Tekstil", "YUNSA": "Tekstil"
 }
 HISSE_LISTESI = list(HISSE_SEKTOR.keys())
+
+def tr_saat():
+    return datetime.now(pytz.timezone('Europe/Istanbul')).strftime('%d.%m.%Y %H:%M:%S')
 
 def bist100_durumu():
     try:
@@ -99,18 +103,16 @@ def analiz_et(kod):
         return {"hisse":kod,"fiyat":round(f,2),"skor":skor,"robot_karari":karar,"rsi_durumu":rd,"ideal_alim":round(f*0.985,2),"tp":round(f*1.08,2),"sl":round(f*0.95,2),"s1":s1,"r1":r1,"direnc20":round(d20,2),"ma10":round(ma10,2),"ma30":round(ma30,2)}
     except: return None
 
-# Session state ile yenileme kontrolü
 if 'son_guncelleme' not in st.session_state:
-    st.session_state.son_guncelleme = datetime.now().strftime('%d.%m.%Y %H:%M:%S')
+    st.session_state.son_guncelleme = tr_saat()
 if 'veri' not in st.session_state:
     st.session_state.veri = None
 
 if st.button("🔄 Verileri Anlık Çek", use_container_width=True):
-    st.session_state.son_guncelleme = datetime.now().strftime('%d.%m.%Y %H:%M:%S')
-    st.session_state.veri = None  # Cache'i temizle
+    st.session_state.son_guncelleme = tr_saat()
+    st.session_state.veri = None
     st.rerun()
 
-# Veri yoksa veya butona basıldıysa yeniden çek
 if st.session_state.veri is None:
     with st.spinner('📡 BIST hisseleri taranıyor...'):
         bist100 = bist100_durumu()
