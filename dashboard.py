@@ -60,11 +60,13 @@ st.markdown("""
     .stRadio > div { gap: 10px; }
     .stRadio label { color: #94a3b8; }
     .stTextInput > div > div > input { background: #111827; color: white; border: 1px solid #1e293b; border-radius: 10px; }
-
-    /* EXPANDER TEMİZ OK */
-    [data-testid="stExpander"] details > summary > span > svg { display: none !important; }
-    [data-testid="stExpander"] details > summary { list-style: none; }
-    [data-testid="stExpander"] details > summary::-webkit-details-marker { display: none; }
+    /* Sekme stilleri */
+    .stTabs [data-baseweb="tab-list"] { gap: 5px; background-color: #0d1525; }
+    .stTabs [data-baseweb="tab"] {
+        background-color: #111827; color: #94a3b8; border-radius: 8px 8px 0 0;
+        padding: 8px 20px; border: 1px solid #1e293b; font-weight: 500;
+    }
+    .stTabs [aria-selected="true"] { background-color: #1e293b; color: #f1f5f9; border-bottom: 2px solid #3b82f6; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -126,7 +128,6 @@ def euro_kuru():
     except: return None, None
 
 def gram_altin():
-    # SADECE ons altın × USD/TRY yöntemi (en güvenilir)
     for _ in range(3):
         try:
             ons = yf.Ticker("GC=F", session=YF)
@@ -234,7 +235,7 @@ if st.session_state.veri is None:
 
 veri = st.session_state.veri
 
-# Üst bant
+# Üst bant (tüm sekmelerde görünür)
 st.markdown('<div class="top-band">', unsafe_allow_html=True)
 metrics = [
     ("BIST 100", veri['bist_f'], veri['bist_d'], "📈"),
@@ -252,79 +253,111 @@ for label, deger, degisim, ikon in metrics:
         st.markdown(f'<div class="metric-box"><div class="metric-label">{ikon} {label}</div><div class="metric-value">{fmt}</div><div class="metric-change {change_class}">{change_sign}{degisim:.2f}%</div></div>', unsafe_allow_html=True)
 st.markdown('</div>', unsafe_allow_html=True)
 
-# Manuel hisse sorgulama
-st.divider()
-col_man, col_btn_man = st.columns([3, 1])
-with col_man:
-    manuel_hisse = st.text_input("🔍 Harici hisse sorgula (örn: THYAO, GARAN)", placeholder="Hisse kodu yazın ve butona basın...").upper().strip()
-with col_btn_man:
-    st.write("")
-    if st.button("🔎 Sorgula", use_container_width=True) and manuel_hisse:
-        with st.spinner(f'{manuel_hisse} analiz ediliyor...'):
-            analiz = analiz_et(manuel_hisse)
-            if analiz:
-                sk = analiz['skor']
-                border_class = "skor-80" if sk>=80 else ("skor-60" if sk>=60 else "skor-diger")
-                score_class = "score-high" if sk>=80 else ("score-mid" if sk>=60 else "score-low")
-                emoji = "🔥" if sk>=80 else ("📈" if sk>=60 else "📉")
+# Manuel hisse sorgulama (tüm sekmelerde görünür)
+with st.expander("🔍 Harici Hisse Sorgula"):
+    col_man, col_btn_man = st.columns([3, 1])
+    with col_man:
+        manuel_hisse = st.text_input("Hisse kodu (örn: THYAO)", placeholder="Kodu yazın ve butona basın...", key="manuel_input").upper().strip()
+    with col_btn_man:
+        st.write("")
+        if st.button("🔎 Sorgula", use_container_width=True, key="manuel_btn") and manuel_hisse:
+            with st.spinner(f'{manuel_hisse} analiz ediliyor...'):
+                analiz = analiz_et(manuel_hisse)
+                if analiz:
+                    sk = analiz['skor']
+                    border_class = "skor-80" if sk>=80 else ("skor-60" if sk>=60 else "skor-diger")
+                    score_class = "score-high" if sk>=80 else ("score-mid" if sk>=60 else "score-low")
+                    emoji = "🔥" if sk>=80 else ("📈" if sk>=60 else "📉")
+                    st.markdown(f'''<div class="stock-card {border_class}">
+                        <div>
+                            <span class="stock-name">#{analiz['hisse']}</span>
+                            <div class="stock-details">💰 {analiz['fiyat']} TL | 🎯 Alım: {analiz['ideal']} | TP: {analiz['tp']} | SL: {analiz['sl']}</div>
+                            <div class="stock-details">📊 {analiz['rsi_durum']} | Hacim: {analiz['hacim']}x | S1: {analiz['s1']} | R1: {analiz['r1']}</div>
+                        </div>
+                        <div style="text-align:right">
+                            <div class="stock-score {score_class}">{sk}</div>
+                            <div style="color:#94a3b8; font-size:13px;">{analiz['karar']} {emoji}</div>
+                        </div>
+                    </div>''', unsafe_allow_html=True)
+                else:
+                    st.error(f"{manuel_hisse} için veri bulunamadı.")
+
+# Ana sekmeler
+tab1, tab2, tab3 = st.tabs(["📈 Hisseler", "📊 Sektörler", "📋 Özet"])
+
+# --- SEKMELER ---
+
+with tab1:
+    gorunum = st.radio("Görünüm", ["Kart", "Tablo"], horizontal=True, key="gorunum")
+    if veri['sonuclar']:
+        df = pd.DataFrame(veri['sonuclar'])
+        col1, col2, col3 = st.columns([2, 1, 1])
+        with col1: ara = st.text_input("🔍 Listede ara", placeholder="Kod yazın...", key="ara")
+        with col2: ms = st.slider("Minimum skor", 0, 100, 60, key="ms")
+        with col3:
+            sl = ["Tümü"] + sorted(set(HISSE_SEKTOR.get(h,"Diger") for h in df['hisse']))
+            ss = st.selectbox("Sektör", sl, key="ss")
+        if ara: df = df[df['hisse'].str.contains(ara.upper())]
+        if ss != "Tümü": df = df[df['hisse'].apply(lambda h: HISSE_SEKTOR.get(h,"Diger")) == ss]
+        df = df[df['skor'] >= ms]
+        df = df.sort_values('skor', ascending=False)
+        
+        if gorunum == "Kart":
+            for _, r in df.iterrows():
+                sk = r['skor']
+                if sk >= 80: border_class = "skor-80"; score_class = "score-high"; emoji = "🔥"
+                elif sk >= 60: border_class = "skor-60"; score_class = "score-mid"; emoji = "📈"
+                else: border_class = "skor-diger"; score_class = "score-low"; emoji = "📉"
+                sektor = HISSE_SEKTOR.get(r['hisse'], 'Diger')
                 st.markdown(f'''<div class="stock-card {border_class}">
                     <div>
-                        <span class="stock-name">#{analiz['hisse']}</span>
-                        <div class="stock-details">💰 {analiz['fiyat']} TL | 🎯 Alım: {analiz['ideal']} | TP: {analiz['tp']} | SL: {analiz['sl']}</div>
-                        <div class="stock-details">📊 {analiz['rsi_durum']} | Hacim: {analiz['hacim']}x | S1: {analiz['s1']} | R1: {analiz['r1']}</div>
+                        <span class="stock-name">#{r['hisse']}</span><span class="stock-sector">{sektor}</span>
+                        <div class="stock-details">💰 {r['fiyat']} TL | 🎯 İdeal Alım: {r['ideal']} | TP: {r['tp']} | SL: {r['sl']}</div>
+                        <div class="stock-details">📊 {r['rsi_durum']} | Hacim: {r['hacim']}x | S1: {r['s1']} | R1: {r['r1']}</div>
                     </div>
                     <div style="text-align:right">
                         <div class="stock-score {score_class}">{sk}</div>
-                        <div style="color:#94a3b8; font-size:13px;">{analiz['karar']} {emoji}</div>
+                        <div style="color:#94a3b8; font-size:13px;">{r['karar']} {emoji}</div>
                     </div>
                 </div>''', unsafe_allow_html=True)
-            else:
-                st.error(f"{manuel_hisse} için veri bulunamadı.")
+        else:
+            display_df = df[['hisse', 'fiyat', 'skor', 'karar', 'ideal', 'tp', 'sl', 'rsi_durum', 'hacim']].copy()
+            display_df.columns = ['Hisse', 'Fiyat', 'Skor', 'Karar', 'Alım', 'TP', 'SL', 'RSI', 'Hacim']
+            st.dataframe(display_df, use_container_width=True, height=600)
+    else:
+        st.warning("Veri çekilemedi, lütfen yenileyin.")
 
-st.divider()
-gorunum = st.radio("Görünüm", ["Kart", "Tablo"], horizontal=True)
-
-with st.expander("📊 Sektör Performansları"):
+with tab2:
+    st.subheader("📊 Sektör Performansları")
     if veri['sektor_ort']:
         sdf = pd.DataFrame(list(veri['sektor_ort'].items()), columns=['Sektör','Ort. Skor'])
         st.dataframe(sdf.sort_values('Ort. Skor', ascending=False), use_container_width=True)
+        
+        # En güçlü ve en zayıf sektörleri vurgula
+        if veri['sirali']:
+            col1, col2 = st.columns(2)
+            with col1:
+                st.success(f"🟢 En Güçlü: {veri['sirali'][0][0]} ({veri['sirali'][0][1]})")
+            with col2:
+                st.error(f"🔴 En Zayıf: {veri['sirali'][-1][0]} ({veri['sirali'][-1][1]})")
 
-st.divider()
-
-if veri['sonuclar']:
-    df = pd.DataFrame(veri['sonuclar'])
-    col1, col2, col3 = st.columns([2, 1, 1])
-    with col1: ara = st.text_input("🔍 Listede ara", placeholder="Kod yazın...")
-    with col2: ms = st.slider("Minimum skor", 0, 100, 60)
-    with col3:
-        sl = ["Tümü"] + sorted(set(HISSE_SEKTOR.get(h,"Diger") for h in df['hisse']))
-        ss = st.selectbox("Sektör", sl)
-    if ara: df = df[df['hisse'].str.contains(ara.upper())]
-    if ss != "Tümü": df = df[df['hisse'].apply(lambda h: HISSE_SEKTOR.get(h,"Diger")) == ss]
-    df = df[df['skor'] >= ms]
-    df = df.sort_values('skor', ascending=False)
-    
-    if gorunum == "Kart":
-        for _, r in df.iterrows():
-            sk = r['skor']
-            if sk >= 80: border_class = "skor-80"; score_class = "score-high"; emoji = "🔥"
-            elif sk >= 60: border_class = "skor-60"; score_class = "score-mid"; emoji = "📈"
-            else: border_class = "skor-diger"; score_class = "score-low"; emoji = "📉"
-            sektor = HISSE_SEKTOR.get(r['hisse'], 'Diger')
-            st.markdown(f'''<div class="stock-card {border_class}">
-                <div>
-                    <span class="stock-name">#{r['hisse']}</span><span class="stock-sector">{sektor}</span>
-                    <div class="stock-details">💰 {r['fiyat']} TL | 🎯 İdeal Alım: {r['ideal']} | TP: {r['tp']} | SL: {r['sl']}</div>
-                    <div class="stock-details">📊 {r['rsi_durum']} | Hacim: {r['hacim']}x | S1: {r['s1']} | R1: {r['r1']}</div>
-                </div>
-                <div style="text-align:right">
-                    <div class="stock-score {score_class}">{sk}</div>
-                    <div style="color:#94a3b8; font-size:13px;">{r['karar']} {emoji}</div>
-                </div>
-            </div>''', unsafe_allow_html=True)
+with tab3:
+    st.subheader("📋 Tarama Özeti")
+    if veri['sonuclar']:
+        toplam = len(veri['sonuclar'])
+        guclu_al = len([x for x in veri['sonuclar'] if x['skor'] >= 80])
+        kademeli = len([x for x in veri['sonuclar'] if 60 <= x['skor'] < 80])
+        bekle = len([x for x in veri['sonuclar'] if x['skor'] < 60])
+        
+        col1, col2, col3, col4 = st.columns(4)
+        with col1: st.metric("Taranan Hisse", toplam)
+        with col2: st.metric("🔥 Güçlü Al", guclu_al)
+        with col3: st.metric("📈 Kademeli Al", kademeli)
+        with col4: st.metric("⏸️ Bekle", bekle)
+        
+        if toplam > 0:
+            basari = (guclu_al / toplam) * 100
+            st.progress(basari / 100)
+            st.caption(f"Güçlü al sinyali oranı: %{basari:.1f}")
     else:
-        display_df = df[['hisse', 'fiyat', 'skor', 'karar', 'ideal', 'tp', 'sl', 'rsi_durum', 'hacim']].copy()
-        display_df.columns = ['Hisse', 'Fiyat', 'Skor', 'Karar', 'Alım', 'TP', 'SL', 'RSI', 'Hacim']
-        st.dataframe(display_df, use_container_width=True, height=600)
-else:
-    st.warning("Veri çekilemedi, lütfen yenileyin.")
+        st.warning("Veri çekilemedi, lütfen yenileyin.")
