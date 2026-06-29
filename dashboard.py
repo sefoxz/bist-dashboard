@@ -62,8 +62,11 @@ st.markdown("""
     .stRadio label { color: #94a3b8; }
     .stExpander { background: #111827; border: 1px solid #1e293b; border-radius: 12px; }
     .stExpander header { color: #e0e6f0; font-weight: 600; }
-    .stExpander svg { fill: #64748b !important; }
     .stTextInput > div > div > input { background: #111827; color: white; border: 1px solid #1e293b; border-radius: 10px; }
+
+    /* Sektör expander okları için düzeltme */
+    .stExpander svg { display: none; }
+    .stExpander .st-cb { color: #e0e6f0; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -126,25 +129,11 @@ def euro_kuru():
 
 def gram_altin():
     try:
-        # Ons altın (USD)
-        ons = yf.Ticker("XAUUSD=X", session=YF)
-        h_ons = _cek(ons, period="2d")
-        if h_ons.empty or len(h_ons) < 2: return None, None
-        ons_f = float(h_ons['Close'].iloc[-1])
-        ons_o = float(h_ons['Close'].iloc[-2])
-        
-        # USD/TRY
-        usd = yf.Ticker("USDTRY=X", session=YF)
-        h_usd = _cek(usd, period="2d")
-        if h_usd.empty or len(h_usd) < 2: return None, None
-        usd_f = float(h_usd['Close'].iloc[-1])
-        usd_o = float(h_usd['Close'].iloc[-2])
-        
-        # Gram altın = (Ons fiyatı * USD/TRY) / 31.1035
-        gram_f = (ons_f * usd_f) / 31.1035
-        gram_o = (ons_o * usd_o) / 31.1035
-        
-        return gram_f, ((gram_f - gram_o) / gram_o) * 100
+        e = yf.Ticker("GAUTRY=X", session=YF)
+        h = _cek(e, period="2d")
+        if h.empty or len(h) < 2: return None, None
+        s = float(h['Close'].iloc[-1]); o = float(h['Close'].iloc[-2])
+        return s, ((s-o)/o)*100
     except: return None, None
 
 def analiz_et(kod):
@@ -315,7 +304,7 @@ if veri['sonuclar']:
             elif sk >= 60: border_class = "skor-60"; score_class = "score-mid"; emoji = "📈"
             else: border_class = "skor-diger"; score_class = "score-low"; emoji = "📉"
             sektor = HISSE_SEKTOR.get(r['hisse'], 'Diger')
-            card_html = f'''<div class="stock-card {border_class}">
+            st.markdown(f'''<div class="stock-card {border_class}">
                 <div>
                     <span class="stock-name">#{r['hisse']}</span><span class="stock-sector">{sektor}</span>
                     <div class="stock-details">💰 {r['fiyat']} TL | 🎯 İdeal Alım: {r['ideal']} | TP: {r['tp']} | SL: {r['sl']}</div>
@@ -325,21 +314,7 @@ if veri['sonuclar']:
                     <div class="stock-score {score_class}">{sk}</div>
                     <div style="color:#94a3b8; font-size:13px;">{r['karar']} {emoji}</div>
                 </div>
-            </div>'''
-            with st.container():
-                st.markdown(card_html, unsafe_allow_html=True)
-                with st.expander("📉 Mini Grafik", expanded=False):
-                    try:
-                        ticker = f"{r['hisse']}.IS"
-                        obj = yf.Ticker(ticker, session=YF)
-                        hist = _cek(obj, period="1mo")
-                        if not hist.empty:
-                            hist['Close'] = pd.to_numeric(hist['Close'])
-                            st.line_chart(hist['Close'], height=150)
-                        else:
-                            st.write("Grafik verisi çekilemedi.")
-                    except:
-                        st.write("Grafik oluşturulamadı.")
+            </div>''', unsafe_allow_html=True)
     else:
         display_df = df[['hisse', 'fiyat', 'skor', 'karar', 'ideal', 'tp', 'sl', 'rsi_durum', 'hacim']].copy()
         display_df.columns = ['Hisse', 'Fiyat', 'Skor', 'Karar', 'Alım', 'TP', 'SL', 'RSI', 'Hacim']
