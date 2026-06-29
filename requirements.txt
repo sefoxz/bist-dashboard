@@ -1,1 +1,7 @@
-
+streamlit
+yfinance
+pandas
+requests
+pytz
+python-dotenv
+pyTelegramBotAPI
