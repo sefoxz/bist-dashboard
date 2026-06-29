@@ -330,35 +330,15 @@ with tab2:
         with col3: st.metric("📈 Kademeli Al", kademeli)
         with col4: st.metric("⏸️ Bekle", bekle)
         
-        # Anlık kar/zarar toplamı
-        toplam_kar_zarar = 0.0
-        for r in veri['sonuclar']:
-            fiyat = r['fiyat']
-            ideal = r['ideal']
-            if ideal > 0:
-                yuzde = ((fiyat - ideal) / ideal) * 100
-                toplam_kar_zarar += yuzde
-        
         st.divider()
-        st.subheader("💰 Toplam Kar/Zarar")
-        st.caption("*İdeal alım fiyatına göre anlık fark toplamıdır, gerçekleşen işlemleri göstermez.*")
-        if toplam_kar_zarar > 0:
-            st.success(f"📈 Toplam Kar: %{toplam_kar_zarar:.2f}")
-        elif toplam_kar_zarar < 0:
-            st.error(f"📉 Toplam Zarar: %{toplam_kar_zarar:.2f}")
-        else:
-            st.info("⚪ Toplam Değişim: %0.00")
         
-        st.write("📊 Hisse Bazlı Fark")
-        perf_list = []
-        for r in veri['sonuclar']:
-            fiyat = r['fiyat']
-            ideal = r['ideal']
-            if ideal > 0:
-                yuzde = ((fiyat - ideal) / ideal) * 100
-                perf_list.append({"Hisse": r['hisse'], "İdeal Alım": ideal, "Güncel": fiyat, "Fark %": round(yuzde, 2)})
-        if perf_list:
-            perf_df = pd.DataFrame(perf_list)
-            st.dataframe(perf_df, use_container_width=True, height=400)
+        # Gerçekleşen İşlemler
+        st.subheader("📊 Gerçekleşen İşlemler")
+        st.info("Bu özellik şu anda sadece `bist-bot` ile entegre çalışabilir. Bağımsız dashboard'da gerçek işlem takibi yapılamaz.")
+        
+        # Haftalık Toplam Kar
+        st.subheader("🗓️ Haftalık Toplam Kar")
+        st.info("Bu özellik şu anda sadece `bist-bot` ile entegre çalışabilir. Bağımsız dashboard'da haftalık kar/zarar takibi yapılamaz.")
+        
     else:
         st.warning("Veri çekilemedi, lütfen yenileyin.")
