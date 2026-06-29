@@ -29,7 +29,6 @@ st.markdown("""
     .metric-change { font-size: 13px; font-weight: 500; }
     .change-up { color: #10b981; }
     .change-down { color: #ef4444; }
-    .header-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
     .update-time { font-size: 13px; color: #64748b; text-align: right; }
     .stock-card {
         background: #111827; border: 1px solid #1e293b; border-radius: 16px;
@@ -61,10 +60,6 @@ st.markdown("""
     .stRadio > div { gap: 10px; }
     .stRadio label { color: #94a3b8; }
     .stTextInput > div > div > input { background: #111827; color: white; border: 1px solid #1e293b; border-radius: 10px; }
-
-    /* KESİN OK ÇÖZÜMÜ: expander header'daki svg'yi tamamen yok et */
-    [data-testid="stExpander"] svg { display: none !important; visibility: hidden !important; width: 0 !important; height: 0 !important; }
-    [data-testid="stExpander"] .st-cb { padding-left: 0 !important; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -126,18 +121,41 @@ def euro_kuru():
     except: return None, None
 
 def gram_altin():
+    # 1. Deneme: yfinance ile gram altın (GAUTRY=X)
+    try:
+        e = yf.Ticker("GAUTRY=X", session=YF)
+        h = _cek(e, period="2d")
+        if not h.empty and len(h) >= 2:
+            s = float(h['Close'].iloc[-1]); o = float(h['Close'].iloc[-2])
+            return s, ((s-o)/o)*100
+    except: pass
+
+    # 2. Deneme: yfinance ons altın ve USD/TRY ile hesaplama
     try:
         ons = yf.Ticker("GC=F", session=YF)
         h_ons = _cek(ons, period="2d")
         usd = yf.Ticker("USDTRY=X", session=YF)
         h_usd = _cek(usd, period="2d")
-        if h_ons.empty or len(h_ons) < 2 or h_usd.empty or len(h_usd) < 2: return None, None
-        ons_f = float(h_ons['Close'].iloc[-1]); usd_f = float(h_usd['Close'].iloc[-1])
-        ons_o = float(h_ons['Close'].iloc[-2]); usd_o = float(h_usd['Close'].iloc[-2])
-        gram_f = (ons_f * usd_f) / 31.1035
-        gram_o = (ons_o * usd_o) / 31.1035
-        return gram_f, ((gram_f - gram_o) / gram_o) * 100
-    except: return None, None
+        if not h_ons.empty and len(h_ons) >= 2 and not h_usd.empty and len(h_usd) >= 2:
+            ons_f = float(h_ons['Close'].iloc[-1]); usd_f = float(h_usd['Close'].iloc[-1])
+            ons_o = float(h_ons['Close'].iloc[-2]); usd_o = float(h_usd['Close'].iloc[-2])
+            gram_f = (ons_f * usd_f) / 31.1035
+            gram_o = (ons_o * usd_o) / 31.1035
+            return gram_f, ((gram_f - gram_o) / gram_o) * 100
+    except: pass
+
+    # 3. Deneme: GenelPara API (ücretsiz, anlık veri)
+    try:
+        r = requests.get("https://api.genelpara.com/embed/para-birimleri.json", timeout=5)
+        if r.status_code == 200:
+            data = r.json()
+            if "GA" in data:
+                gram_f = float(data["GA"]["satis"])
+                # API anlık veri verdiği için önceki günü bilmiyoruz, değişim %0.00
+                return gram_f, 0.0
+    except: pass
+
+    return None, None
 
 def analiz_et(kod):
     t = f"{kod}.IS"
@@ -276,10 +294,11 @@ with col_btn_man:
 st.divider()
 gorunum = st.radio("Görünüm", ["Kart", "Tablo"], horizontal=True)
 
-with st.expander("📊 Sektör Performansları"):
-    if veri['sektor_ort']:
-        sdf = pd.DataFrame(list(veri['sektor_ort'].items()), columns=['Sektör','Ort. Skor'])
-        st.dataframe(sdf.sort_values('Ort. Skor', ascending=False), use_container_width=True)
+# Sektör performansı - expander yok, her zaman görünür
+st.subheader("📊 Sektör Performansları")
+if veri['sektor_ort']:
+    sdf = pd.DataFrame(list(veri['sektor_ort'].items()), columns=['Sektör','Ort. Skor'])
+    st.dataframe(sdf.sort_values('Ort. Skor', ascending=False), use_container_width=True)
 
 st.divider()
 
