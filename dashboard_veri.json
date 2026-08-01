@@ -1,5 +1,5 @@
 {
-  "son_guncelleme": "01.08.2026 14:47",
+  "son_guncelleme": "01.08.2026 15:46",
   "bist100_durum": "YÜKSELİŞ 📈 (%+1.24)",
   "toplam_hisse": 30,
   "hisseler": [
@@ -89,23 +89,6 @@
       "hacim_orani": 1.4
     },
     {
-      "hisse": "ALFAS",
-      "fiyat": NaN,
-      "skor": 70,
-      "robot_karari": "KADEMELİ AL 📈",
-      "rsi_durumu": "Aşırı Satım 🟢 (RSI: 28.8)",
-      "ideal_alim": NaN,
-      "tp": NaN,
-      "sl": NaN,
-      "s1": 40.19,
-      "r1": 41.83,
-      "direnc20": 48.84,
-      "ma10": NaN,
-      "ma30": NaN,
-      "rsi_deger": 28.8,
-      "hacim_orani": 0.4
-    },
-    {
       "hisse": "ARDYZ",
       "fiyat": 72.3,
       "skor": 70,
@@ -191,23 +174,6 @@
       "hacim_orani": 0.7
     },
     {
-      "hisse": "CWENE",
-      "fiyat": NaN,
-      "skor": 50,
-      "robot_karari": "DİRENÇTE BEKLE 🛑",
-      "rsi_durumu": "Nötr ⚪ (RSI: 37.3)",
-      "ideal_alim": NaN,
-      "tp": NaN,
-      "sl": NaN,
-      "s1": 34.66,
-      "r1": 36.58,
-      "direnc20": 42.7,
-      "ma10": NaN,
-      "ma30": NaN,
-      "rsi_deger": 37.3,
-      "hacim_orani": 0.6
-    },
-    {
       "hisse": "AHGAZ",
       "fiyat": 33.46,
       "skor": 45,
@@ -223,6 +189,23 @@
       "ma30": 35.96,
       "rsi_deger": 25.6,
       "hacim_orani": 0.5
+    },
+    {
+      "hisse": "ALFAS",
+      "fiyat": 41.04,
+      "skor": 45,
+      "robot_karari": "DİRENÇTE BEKLE 🛑",
+      "rsi_durumu": "Aşırı Satım 🟢 (RSI: 29.3)",
+      "ideal_alim": 40.42,
+      "tp": 44.52,
+      "sl": 38.43,
+      "s1": 40.19,
+      "r1": 41.83,
+      "direnc20": 48.84,
+      "ma10": 44.49,
+      "ma30": 46.78,
+      "rsi_deger": 29.3,
+      "hacim_orani": 0.4
     },
     {
       "hisse": "ARENA",
@@ -325,6 +308,23 @@
       "ma30": 1.31,
       "rsi_deger": 34.6,
       "hacim_orani": 0.8
+    },
+    {
+      "hisse": "CWENE",
+      "fiyat": 34.0,
+      "skor": 45,
+      "robot_karari": "DİRENÇTE BEKLE 🛑",
+      "rsi_durumu": "Aşırı Satım 🟢 (RSI: 32.7)",
+      "ideal_alim": 33.49,
+      "tp": 37.58,
+      "sl": 31.31,
+      "s1": 34.66,
+      "r1": 36.58,
+      "direnc20": 42.7,
+      "ma10": 37.82,
+      "ma30": 38.73,
+      "rsi_deger": 32.7,
+      "hacim_orani": 0.6
     },
     {
       "hisse": "ECILC",
@@ -517,7 +517,7 @@
   "sektor_ortalamalar": {
     "Kimya": 70.0,
     "Gida": 63.3,
-    "Enerji": 53.1,
+    "Enerji": 49.4,
     "Otomotiv": 80.0,
     "Teknoloji": 57.5,
     "Gyo": 50.0,
