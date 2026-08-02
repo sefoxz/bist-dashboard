@@ -1,5 +1,5 @@
 {
-  "son_guncelleme": "02.08.2026 01:14",
+  "son_guncelleme": "02.08.2026 04:42",
   "bist100_durum": "YÜKSELİŞ 📈 (%+1.24)",
   "toplam_hisse": 30,
   "hisseler": [
@@ -172,6 +172,40 @@
       "ma30": 225.97,
       "rsi_deger": 53.6,
       "hacim_orani": 0.7
+    },
+    {
+      "hisse": "BRSAN",
+      "fiyat": NaN,
+      "skor": 50,
+      "robot_karari": "DİRENÇTE BEKLE 🛑",
+      "rsi_durumu": "Nötr ⚪ (RSI: 47.6)",
+      "ideal_alim": NaN,
+      "tp": NaN,
+      "sl": NaN,
+      "s1": 521.0,
+      "r1": 541.0,
+      "direnc20": 583.5,
+      "ma10": NaN,
+      "ma30": NaN,
+      "rsi_deger": 47.6,
+      "hacim_orani": 1.7
+    },
+    {
+      "hisse": "DEVA",
+      "fiyat": NaN,
+      "skor": 50,
+      "robot_karari": "DİRENÇTE BEKLE 🛑",
+      "rsi_durumu": "Nötr ⚪ (RSI: 55.4)",
+      "ideal_alim": NaN,
+      "tp": NaN,
+      "sl": NaN,
+      "s1": 70.4,
+      "r1": 75.25,
+      "direnc20": 77.6,
+      "ma10": NaN,
+      "ma30": NaN,
+      "rsi_deger": 55.4,
+      "hacim_orani": 1.2
     },
     {
       "hisse": "AHGAZ",
@@ -446,23 +480,6 @@
       "hacim_orani": 0.9
     },
     {
-      "hisse": "BRSAN",
-      "fiyat": 521.5,
-      "skor": 25,
-      "robot_karari": "DİRENÇTE BEKLE 🛑",
-      "rsi_durumu": "Nötr ⚪ (RSI: 45.8)",
-      "ideal_alim": 513.68,
-      "tp": 566.93,
-      "sl": 487.43,
-      "s1": 521.0,
-      "r1": 541.0,
-      "direnc20": 583.5,
-      "ma10": 552.0,
-      "ma30": 557.47,
-      "rsi_deger": 45.8,
-      "hacim_orani": 1.7
-    },
-    {
       "hisse": "CIMSA",
       "fiyat": 44.84,
       "skor": 25,
@@ -478,23 +495,6 @@
       "ma30": 48.19,
       "rsi_deger": 41.2,
       "hacim_orani": 1.3
-    },
-    {
-      "hisse": "DEVA",
-      "fiyat": 70.1,
-      "skor": 25,
-      "robot_karari": "DİRENÇTE BEKLE 🛑",
-      "rsi_durumu": "Nötr ⚪ (RSI: 48.6)",
-      "ideal_alim": 69.05,
-      "tp": 75.71,
-      "sl": 65.89,
-      "s1": 70.4,
-      "r1": 75.25,
-      "direnc20": 77.6,
-      "ma10": 73.6,
-      "ma30": 72.31,
-      "rsi_deger": 48.6,
-      "hacim_orani": 1.2
     },
     {
       "hisse": "EUPWR",
@@ -523,17 +523,17 @@
     "Gyo": 50.0,
     "Holding": 40.0,
     "Cimento": 42.5,
-    "DemirCelik": 38.3,
+    "DemirCelik": 46.7,
+    "Ilac": 50.0,
     "Tekstil": 45.0,
-    "Banka": 25.0,
-    "Ilac": 25.0
+    "Banka": 25.0
   },
   "en_guclu_sektor": [
     "Otomotiv",
     80.0
   ],
   "en_zayif_sektor": [
-    "Ilac",
+    "Banka",
     25.0
   ]
 }
