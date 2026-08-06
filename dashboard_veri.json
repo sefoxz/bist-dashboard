@@ -1,5 +1,5 @@
 {
-  "son_guncelleme": "05.08.2026 23:36",
+  "son_guncelleme": "06.08.2026 01:00",
   "bist100_durum": "YÜKSELİŞ 📈 (%+2.07)",
   "toplam_hisse": 30,
   "hisseler": [
@@ -382,7 +382,7 @@
       "fiyat": NaN,
       "skor": 50,
       "robot_karari": "DİRENÇTE BEKLE 🛑",
-      "rsi_durumu": "Nötr ⚪ (RSI: 42.9)",
+      "rsi_durumu": "Nötr ⚪ (RSI: 56.4)",
       "ideal_alim": NaN,
       "tp": NaN,
       "sl": NaN,
@@ -391,7 +391,7 @@
       "direnc20": 93.5,
       "ma10": NaN,
       "ma30": NaN,
-      "rsi_deger": 42.9,
+      "rsi_deger": 56.4,
       "hacim_orani": 0.8
     },
     {
@@ -399,7 +399,7 @@
       "fiyat": NaN,
       "skor": 50,
       "robot_karari": "DİRENÇTE BEKLE 🛑",
-      "rsi_durumu": "Nötr ⚪ (RSI: 37.5)",
+      "rsi_durumu": "Nötr ⚪ (RSI: 49.6)",
       "ideal_alim": NaN,
       "tp": NaN,
       "sl": NaN,
@@ -408,7 +408,7 @@
       "direnc20": 51.2,
       "ma10": NaN,
       "ma30": NaN,
-      "rsi_deger": 37.5,
+      "rsi_deger": 49.6,
       "hacim_orani": 1.5
     },
     {
