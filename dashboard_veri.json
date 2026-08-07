@@ -1,5 +1,5 @@
 {
-  "son_guncelleme": "07.08.2026 22:52",
+  "son_guncelleme": "07.08.2026 23:22",
   "bist100_durum": "YÜKSELİŞ 📈 (%+0.70)",
   "toplam_hisse": 30,
   "hisseler": [
@@ -144,7 +144,7 @@
       "fiyat": NaN,
       "skor": 70,
       "robot_karari": "KADEMELİ AL 📈",
-      "rsi_durumu": "Aşırı Satım 🟢 (RSI: 22.1)",
+      "rsi_durumu": "Aşırı Satım 🟢 (RSI: 29.6)",
       "ideal_alim": NaN,
       "tp": NaN,
       "sl": NaN,
@@ -153,7 +153,7 @@
       "direnc20": 51.2,
       "ma10": NaN,
       "ma30": NaN,
-      "rsi_deger": 22.1,
+      "rsi_deger": 29.6,
       "hacim_orani": 0.8
     },
     {
