@@ -1,5 +1,5 @@
 {
-  "son_guncelleme": "08.08.2026 05:11",
+  "son_guncelleme": "08.08.2026 05:56",
   "bist100_durum": "NÖTR ⚪ (%-0.14)",
   "toplam_hisse": 30,
   "hisseler": [
@@ -87,23 +87,6 @@
       "ma30": NaN,
       "rsi_deger": 19.6,
       "hacim_orani": 1.0
-    },
-    {
-      "hisse": "ALFAS",
-      "fiyat": NaN,
-      "skor": 70,
-      "robot_karari": "KADEMELİ AL 📈",
-      "rsi_durumu": "Aşırı Satım 🟢 (RSI: 33.0)",
-      "ideal_alim": NaN,
-      "tp": NaN,
-      "sl": NaN,
-      "s1": 41.94,
-      "r1": 42.68,
-      "direnc20": 47.94,
-      "ma10": NaN,
-      "ma30": NaN,
-      "rsi_deger": 33.0,
-      "hacim_orani": 0.6
     },
     {
       "hisse": "ARENA",
@@ -297,16 +280,16 @@
       "fiyat": NaN,
       "skor": 60,
       "robot_karari": "KADEMELİ AL 📈",
-      "rsi_durumu": "Nötr ⚪ (RSI: 42.4)",
+      "rsi_durumu": "Nötr ⚪ (RSI: 44.4)",
       "ideal_alim": NaN,
       "tp": NaN,
       "sl": NaN,
       "s1": 5.1,
       "r1": 5.34,
-      "direnc20": 5.44,
+      "direnc20": 5.56,
       "ma10": NaN,
       "ma30": NaN,
-      "rsi_deger": 42.4,
+      "rsi_deger": 44.4,
       "hacim_orani": 2.0
     },
     {
@@ -314,7 +297,7 @@
       "fiyat": NaN,
       "skor": 60,
       "robot_karari": "KADEMELİ AL 📈",
-      "rsi_durumu": "Nötr ⚪ (RSI: 59.5)",
+      "rsi_durumu": "Nötr ⚪ (RSI: 62.4)",
       "ideal_alim": NaN,
       "tp": NaN,
       "sl": NaN,
@@ -323,8 +306,8 @@
       "direnc20": 193.9,
       "ma10": NaN,
       "ma30": NaN,
-      "rsi_deger": 59.5,
-      "hacim_orani": 1.3
+      "rsi_deger": 62.4,
+      "hacim_orani": 1.4
     },
     {
       "hisse": "ECILC",
@@ -412,6 +395,23 @@
       "hacim_orani": 0.5
     },
     {
+      "hisse": "ALFAS",
+      "fiyat": NaN,
+      "skor": 50,
+      "robot_karari": "DİRENÇTE BEKLE 🛑",
+      "rsi_durumu": "Nötr ⚪ (RSI: 39.0)",
+      "ideal_alim": NaN,
+      "tp": NaN,
+      "sl": NaN,
+      "s1": 41.94,
+      "r1": 42.68,
+      "direnc20": 47.94,
+      "ma10": NaN,
+      "ma30": NaN,
+      "rsi_deger": 39.0,
+      "hacim_orani": 0.6
+    },
+    {
       "hisse": "CCOLA",
       "fiyat": NaN,
       "skor": 50,
@@ -433,7 +433,7 @@
       "fiyat": NaN,
       "skor": 50,
       "robot_karari": "DİRENÇTE BEKLE 🛑",
-      "rsi_durumu": "Nötr ⚪ (RSI: 44.2)",
+      "rsi_durumu": "Nötr ⚪ (RSI: 53.8)",
       "ideal_alim": NaN,
       "tp": NaN,
       "sl": NaN,
@@ -442,7 +442,7 @@
       "direnc20": 108.6,
       "ma10": NaN,
       "ma30": NaN,
-      "rsi_deger": 44.2,
+      "rsi_deger": 53.8,
       "hacim_orani": 0.6
     },
     {
@@ -518,7 +518,7 @@
     "Gyo": 65.0,
     "Gida": 60.0,
     "Cimento": 65.0,
-    "Enerji": 50.6,
+    "Enerji": 48.1,
     "Holding": 65.0,
     "Teknoloji": 52.5,
     "Kimya": 65.0,
@@ -534,6 +534,6 @@
   ],
   "en_zayif_sektor": [
     "Enerji",
-    50.6
+    48.1
   ]
 }
