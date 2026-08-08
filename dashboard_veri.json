@@ -1,5 +1,5 @@
 {
-  "son_guncelleme": "08.08.2026 16:54",
+  "son_guncelleme": "08.08.2026 17:23",
   "bist100_durum": "NÖTR ⚪ (%-0.14)",
   "toplam_hisse": 30,
   "hisseler": [
@@ -59,17 +59,17 @@
       "fiyat": 12.54,
       "skor": 80,
       "robot_karari": "GÜÇLÜ AL 🔥",
-      "rsi_durumu": "Nötr ⚪ (RSI: 53.8)",
+      "rsi_durumu": "Nötr ⚪ (RSI: 49.2)",
       "ideal_alim": 12.35,
-      "tp": 13.33,
-      "sl": 11.95,
+      "tp": 13.38,
+      "sl": 11.91,
       "s1": 12.55,
       "r1": 12.78,
       "direnc20": 13.28,
-      "ma10": 12.42,
-      "ma30": 12.08,
-      "rsi_deger": 53.8,
-      "hacim_orani": 0.9
+      "ma10": 12.51,
+      "ma30": 12.13,
+      "rsi_deger": 49.2,
+      "hacim_orani": 0.8
     },
     {
       "hisse": "ALBRK",
@@ -123,23 +123,6 @@
       "hacim_orani": 1.5
     },
     {
-      "hisse": "AEFES",
-      "fiyat": 21.58,
-      "skor": 70,
-      "robot_karari": "KADEMELİ AL 📈",
-      "rsi_durumu": "Nötr ⚪ (RSI: 57.0)",
-      "ideal_alim": 21.26,
-      "tp": 23.09,
-      "sl": 20.44,
-      "s1": 21.19,
-      "r1": 21.75,
-      "direnc20": 22.52,
-      "ma10": 21.52,
-      "ma30": 21.04,
-      "rsi_deger": 57.0,
-      "hacim_orani": 0.8
-    },
-    {
       "hisse": "ALGYO",
       "fiyat": 3.4,
       "skor": 70,
@@ -189,6 +172,23 @@
       "ma30": 18.4,
       "rsi_deger": 26.3,
       "hacim_orani": 0.7
+    },
+    {
+      "hisse": "AEFES",
+      "fiyat": 21.58,
+      "skor": 55,
+      "robot_karari": "DİRENÇTE BEKLE 🛑",
+      "rsi_durumu": "Nötr ⚪ (RSI: 53.7)",
+      "ideal_alim": 21.26,
+      "tp": 23.08,
+      "sl": 20.45,
+      "s1": 21.19,
+      "r1": 21.75,
+      "direnc20": 22.52,
+      "ma10": 21.61,
+      "ma30": 21.08,
+      "rsi_deger": 53.7,
+      "hacim_orani": 0.8
     },
     {
       "hisse": "ALFAS",
@@ -327,6 +327,23 @@
       "hacim_orani": 0.9
     },
     {
+      "hisse": "CANTE",
+      "fiyat": 1.21,
+      "skor": 50,
+      "robot_karari": "DİRENÇTE BEKLE 🛑",
+      "rsi_durumu": "Nötr ⚪ (RSI: 35.7)",
+      "ideal_alim": 1.19,
+      "tp": 1.28,
+      "sl": 1.16,
+      "s1": 1.18,
+      "r1": 1.2,
+      "direnc20": 1.33,
+      "ma10": 1.2,
+      "ma30": 1.27,
+      "rsi_deger": 35.7,
+      "hacim_orani": 0.7
+    },
+    {
       "hisse": "ECILC",
       "fiyat": 69.5,
       "skor": 50,
@@ -463,23 +480,6 @@
       "hacim_orani": 1.0
     },
     {
-      "hisse": "CANTE",
-      "fiyat": 1.21,
-      "skor": 35,
-      "robot_karari": "DİRENÇTE BEKLE 🛑",
-      "rsi_durumu": "Nötr ⚪ (RSI: 37.0)",
-      "ideal_alim": 1.19,
-      "tp": 1.28,
-      "sl": 1.16,
-      "s1": 1.18,
-      "r1": 1.2,
-      "direnc20": 1.33,
-      "ma10": 1.21,
-      "ma30": 1.28,
-      "rsi_deger": 37.0,
-      "hacim_orani": 0.7
-    },
-    {
       "hisse": "AKFGY",
       "fiyat": 2.69,
       "skor": 25,
@@ -521,10 +521,10 @@
     "Kimya": 70.0,
     "Banka": 80.0,
     "DemirCelik": 60.0,
-    "Gida": 65.0,
     "Gyo": 47.5,
+    "Gida": 60.0,
     "Teknoloji": 50.0,
-    "Cimento": 46.2,
+    "Cimento": 50.0,
     "Tekstil": 45.0,
     "Ilac": 40.0
   },
