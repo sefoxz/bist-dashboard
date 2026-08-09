@@ -1,5 +1,5 @@
 {
-  "son_guncelleme": "09.08.2026 10:07",
+  "son_guncelleme": "09.08.2026 10:50",
   "bist100_durum": "NÖTR ⚪ (%-0.14)",
   "toplam_hisse": 30,
   "hisseler": [
@@ -25,17 +25,17 @@
       "fiyat": 42.2,
       "skor": 85,
       "robot_karari": "GÜÇLÜ AL 🔥",
-      "rsi_durumu": "Nötr ⚪ (RSI: 55.0)",
+      "rsi_durumu": "Nötr ⚪ (RSI: 54.1)",
       "ideal_alim": 41.57,
-      "tp": 48.1,
+      "tp": 48.16,
       "sl": 38.82,
       "s1": 44.1,
       "r1": 48.9,
       "direnc20": 48.3,
-      "ma10": 39.59,
-      "ma30": 39.35,
-      "rsi_deger": 55.0,
-      "hacim_orani": 3.5
+      "ma10": 39.26,
+      "ma30": 39.24,
+      "rsi_deger": 54.1,
+      "hacim_orani": 3.6
     },
     {
       "hisse": "AGHOL",
@@ -316,15 +316,15 @@
       "robot_karari": "DİRENÇTE BEKLE 🛑",
       "rsi_durumu": "Nötr ⚪ (RSI: 43.0)",
       "ideal_alim": 1740.49,
-      "tp": 1865.29,
-      "sl": 1693.29,
+      "tp": 1864.71,
+      "sl": 1693.71,
       "s1": 1749.33,
       "r1": 1789.33,
-      "direnc20": 1870.0,
-      "ma10": 1746.8,
-      "ma30": 1811.5,
+      "direnc20": 1857.0,
+      "ma10": 1736.2,
+      "ma30": 1806.4,
       "rsi_deger": 43.0,
-      "hacim_orani": 1.0
+      "hacim_orani": 0.9
     },
     {
       "hisse": "CANTE",
