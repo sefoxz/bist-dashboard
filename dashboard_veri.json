@@ -1,5 +1,5 @@
 {
-  "son_guncelleme": "12.08.2026 21:11",
+  "son_guncelleme": "12.08.2026 22:02",
   "bist100_durum": "DÜŞÜŞ 📉 (%-0.78)",
   "toplam_hisse": 30,
   "hisseler": [
@@ -157,23 +157,6 @@
       "hacim_orani": 1.4
     },
     {
-      "hisse": "CCOLA",
-      "fiyat": NaN,
-      "skor": 70,
-      "robot_karari": "KADEMELİ AL 📈",
-      "rsi_durumu": "Aşırı Satım 🟢 (RSI: 34.8)",
-      "ideal_alim": NaN,
-      "tp": NaN,
-      "sl": NaN,
-      "s1": 84.5,
-      "r1": 89.35,
-      "direnc20": 93.5,
-      "ma10": NaN,
-      "ma30": NaN,
-      "rsi_deger": 34.8,
-      "hacim_orani": 2.9
-    },
-    {
       "hisse": "CIMSA",
       "fiyat": NaN,
       "skor": 70,
@@ -280,7 +263,7 @@
       "fiyat": NaN,
       "skor": 60,
       "robot_karari": "KADEMELİ AL 📈",
-      "rsi_durumu": "Nötr ⚪ (RSI: 50.9)",
+      "rsi_durumu": "Nötr ⚪ (RSI: 47.3)",
       "ideal_alim": NaN,
       "tp": NaN,
       "sl": NaN,
@@ -289,7 +272,7 @@
       "direnc20": 330.75,
       "ma10": NaN,
       "ma30": NaN,
-      "rsi_deger": 50.9,
+      "rsi_deger": 47.3,
       "hacim_orani": 1.7
     },
     {
@@ -314,7 +297,7 @@
       "fiyat": NaN,
       "skor": 60,
       "robot_karari": "KADEMELİ AL 📈",
-      "rsi_durumu": "Nötr ⚪ (RSI: 48.1)",
+      "rsi_durumu": "Nötr ⚪ (RSI: 48.8)",
       "ideal_alim": NaN,
       "tp": NaN,
       "sl": NaN,
@@ -323,7 +306,7 @@
       "direnc20": 1930.0,
       "ma10": NaN,
       "ma30": NaN,
-      "rsi_deger": 48.1,
+      "rsi_deger": 48.8,
       "hacim_orani": 1.3
     },
     {
@@ -348,7 +331,7 @@
       "fiyat": NaN,
       "skor": 60,
       "robot_karari": "KADEMELİ AL 📈",
-      "rsi_durumu": "Nötr ⚪ (RSI: 64.7)",
+      "rsi_durumu": "Nötr ⚪ (RSI: 63.9)",
       "ideal_alim": NaN,
       "tp": NaN,
       "sl": NaN,
@@ -357,24 +340,24 @@
       "direnc20": 198.2,
       "ma10": NaN,
       "ma30": NaN,
-      "rsi_deger": 64.7,
-      "hacim_orani": 2.4
+      "rsi_deger": 63.9,
+      "hacim_orani": 2.3
     },
     {
       "hisse": "ECILC",
       "fiyat": NaN,
       "skor": 60,
       "robot_karari": "KADEMELİ AL 📈",
-      "rsi_durumu": "Nötr ⚪ (RSI: 39.3)",
+      "rsi_durumu": "Nötr ⚪ (RSI: 43.3)",
       "ideal_alim": NaN,
       "tp": NaN,
       "sl": NaN,
       "s1": 68.87,
       "r1": 71.17,
-      "direnc20": 76.0,
+      "direnc20": 75.3,
       "ma10": NaN,
       "ma30": NaN,
-      "rsi_deger": 39.3,
+      "rsi_deger": 43.3,
       "hacim_orani": 2.0
     },
     {
@@ -446,6 +429,23 @@
       "hacim_orani": 1.6
     },
     {
+      "hisse": "CCOLA",
+      "fiyat": NaN,
+      "skor": 50,
+      "robot_karari": "DİRENÇTE BEKLE 🛑",
+      "rsi_durumu": "Nötr ⚪ (RSI: 37.5)",
+      "ideal_alim": NaN,
+      "tp": NaN,
+      "sl": NaN,
+      "s1": 84.5,
+      "r1": 89.35,
+      "direnc20": 93.5,
+      "ma10": NaN,
+      "ma30": NaN,
+      "rsi_deger": 37.5,
+      "hacim_orani": 2.9
+    },
+    {
       "hisse": "DEVA",
       "fiyat": NaN,
       "skor": 50,
@@ -467,7 +467,7 @@
       "fiyat": NaN,
       "skor": 35,
       "robot_karari": "DİRENÇTE BEKLE 🛑",
-      "rsi_durumu": "Aşırı Alım 🔴 (RSI: 70.4)",
+      "rsi_durumu": "Aşırı Alım 🔴 (RSI: 69.5)",
       "ideal_alim": NaN,
       "tp": NaN,
       "sl": NaN,
@@ -476,7 +476,7 @@
       "direnc20": 83.25,
       "ma10": NaN,
       "ma30": NaN,
-      "rsi_deger": 70.4,
+      "rsi_deger": 69.5,
       "hacim_orani": 1.0
     },
     {
@@ -501,7 +501,7 @@
       "fiyat": NaN,
       "skor": 35,
       "robot_karari": "DİRENÇTE BEKLE 🛑",
-      "rsi_durumu": "Aşırı Alım 🔴 (RSI: 72.7)",
+      "rsi_durumu": "Aşırı Alım 🔴 (RSI: 76.8)",
       "ideal_alim": NaN,
       "tp": NaN,
       "sl": NaN,
@@ -510,7 +510,7 @@
       "direnc20": 51.05,
       "ma10": NaN,
       "ma30": NaN,
-      "rsi_deger": 72.7,
+      "rsi_deger": 76.8,
       "hacim_orani": 1.1
     }
   ],
@@ -520,10 +520,10 @@
     "Cimento": 70.0,
     "Teknoloji": 52.5,
     "Kimya": 60.0,
-    "Gida": 60.0,
     "Tekstil": 70.0,
     "Holding": 60.0,
     "Banka": 60.0,
+    "Gida": 53.3,
     "DemirCelik": 51.7,
     "Otomotiv": 60.0,
     "Ilac": 50.0
