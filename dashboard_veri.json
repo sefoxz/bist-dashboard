@@ -1,5 +1,5 @@
 {
-  "son_guncelleme": "13.08.2026 22:54",
+  "son_guncelleme": "13.08.2026 23:35",
   "bist100_durum": "YÜKSELİŞ 📈 (%+2.96)",
   "toplam_hisse": 30,
   "hisseler": [
@@ -116,7 +116,7 @@
       "sl": NaN,
       "s1": 31.57,
       "r1": 32.59,
-      "direnc20": 37.9,
+      "direnc20": 38.6,
       "ma10": NaN,
       "ma30": NaN,
       "rsi_deger": 16.2,
@@ -218,7 +218,7 @@
       "sl": NaN,
       "s1": 5203.33,
       "r1": 5298.33,
-      "direnc20": 5600.0,
+      "direnc20": 5690.0,
       "ma10": NaN,
       "ma30": NaN,
       "rsi_deger": 24.9,
@@ -286,11 +286,11 @@
       "sl": NaN,
       "s1": 17.86,
       "r1": 18.48,
-      "direnc20": 19.55,
+      "direnc20": 19.3,
       "ma10": NaN,
       "ma30": NaN,
       "rsi_deger": 37.2,
-      "hacim_orani": 5.2
+      "hacim_orani": 5.3
     },
     {
       "hisse": "BRYAT",
@@ -405,11 +405,11 @@
       "sl": NaN,
       "s1": 100.23,
       "r1": 103.63,
-      "direnc20": 111.0,
+      "direnc20": 110.7,
       "ma10": NaN,
       "ma30": NaN,
       "rsi_deger": 39.1,
-      "hacim_orani": 0.9
+      "hacim_orani": 1.0
     },
     {
       "hisse": "DEVA",
@@ -511,7 +511,7 @@
       "ma10": NaN,
       "ma30": NaN,
       "rsi_deger": 71.5,
-      "hacim_orani": 1.6
+      "hacim_orani": 1.5
     }
   ],
   "sektor_ortalamalar": {
