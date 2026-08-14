@@ -1,5 +1,5 @@
 {
-  "son_guncelleme": "14.08.2026 03:12",
+  "son_guncelleme": "14.08.2026 05:03",
   "bist100_durum": "YÜKSELİŞ 📈 (%+0.16)",
   "toplam_hisse": 30,
   "hisseler": [
@@ -25,7 +25,7 @@
       "fiyat": NaN,
       "skor": 80,
       "robot_karari": "GÜÇLÜ AL 🔥",
-      "rsi_durumu": "Aşırı Satım 🟢 (RSI: 29.1)",
+      "rsi_durumu": "Aşırı Satım 🟢 (RSI: 34.0)",
       "ideal_alim": NaN,
       "tp": NaN,
       "sl": NaN,
@@ -34,7 +34,7 @@
       "direnc20": 3.86,
       "ma10": NaN,
       "ma30": NaN,
-      "rsi_deger": 29.1,
+      "rsi_deger": 34.0,
       "hacim_orani": 0.6
     },
     {
@@ -110,17 +110,17 @@
       "fiyat": NaN,
       "skor": 70,
       "robot_karari": "KADEMELİ AL 📈",
-      "rsi_durumu": "Aşırı Satım 🟢 (RSI: 16.2)",
+      "rsi_durumu": "Aşırı Satım 🟢 (RSI: 21.1)",
       "ideal_alim": NaN,
       "tp": NaN,
       "sl": NaN,
       "s1": 31.57,
       "r1": 32.59,
-      "direnc20": 37.9,
+      "direnc20": 37.42,
       "ma10": NaN,
       "ma30": NaN,
-      "rsi_deger": 16.2,
-      "hacim_orani": 2.1
+      "rsi_deger": 21.1,
+      "hacim_orani": 2.2
     },
     {
       "hisse": "AKFGY",
@@ -161,7 +161,7 @@
       "fiyat": NaN,
       "skor": 70,
       "robot_karari": "KADEMELİ AL 📈",
-      "rsi_durumu": "Aşırı Satım 🟢 (RSI: 14.5)",
+      "rsi_durumu": "Aşırı Satım 🟢 (RSI: 15.7)",
       "ideal_alim": NaN,
       "tp": NaN,
       "sl": NaN,
@@ -170,7 +170,7 @@
       "direnc20": 26.56,
       "ma10": NaN,
       "ma30": NaN,
-      "rsi_deger": 14.5,
+      "rsi_deger": 15.7,
       "hacim_orani": 0.6
     },
     {
@@ -178,7 +178,7 @@
       "fiyat": NaN,
       "skor": 70,
       "robot_karari": "KADEMELİ AL 📈",
-      "rsi_durumu": "Aşırı Satım 🟢 (RSI: 30.5)",
+      "rsi_durumu": "Aşırı Satım 🟢 (RSI: 31.4)",
       "ideal_alim": NaN,
       "tp": NaN,
       "sl": NaN,
@@ -187,7 +187,7 @@
       "direnc20": 93.5,
       "ma10": NaN,
       "ma30": NaN,
-      "rsi_deger": 30.5,
+      "rsi_deger": 31.4,
       "hacim_orani": 1.3
     },
     {
@@ -212,7 +212,7 @@
       "fiyat": NaN,
       "skor": 70,
       "robot_karari": "KADEMELİ AL 📈",
-      "rsi_durumu": "Aşırı Satım 🟢 (RSI: 24.9)",
+      "rsi_durumu": "Aşırı Satım 🟢 (RSI: 29.2)",
       "ideal_alim": NaN,
       "tp": NaN,
       "sl": NaN,
@@ -221,7 +221,7 @@
       "direnc20": 5600.0,
       "ma10": NaN,
       "ma30": NaN,
-      "rsi_deger": 24.9,
+      "rsi_deger": 29.2,
       "hacim_orani": 1.2
     },
     {
@@ -263,7 +263,7 @@
       "fiyat": NaN,
       "skor": 60,
       "robot_karari": "KADEMELİ AL 📈",
-      "rsi_durumu": "Nötr ⚪ (RSI: 60.4)",
+      "rsi_durumu": "Nötr ⚪ (RSI: 64.6)",
       "ideal_alim": NaN,
       "tp": NaN,
       "sl": NaN,
@@ -272,7 +272,7 @@
       "direnc20": 331.75,
       "ma10": NaN,
       "ma30": NaN,
-      "rsi_deger": 60.4,
+      "rsi_deger": 64.6,
       "hacim_orani": 1.9
     },
     {
@@ -286,11 +286,11 @@
       "sl": NaN,
       "s1": 17.86,
       "r1": 18.48,
-      "direnc20": 19.55,
+      "direnc20": 19.3,
       "ma10": NaN,
       "ma30": NaN,
       "rsi_deger": 37.2,
-      "hacim_orani": 5.2
+      "hacim_orani": 5.3
     },
     {
       "hisse": "BRYAT",
@@ -405,11 +405,11 @@
       "sl": NaN,
       "s1": 100.23,
       "r1": 103.63,
-      "direnc20": 111.0,
+      "direnc20": 110.7,
       "ma10": NaN,
       "ma30": NaN,
       "rsi_deger": 39.1,
-      "hacim_orani": 0.9
+      "hacim_orani": 1.0
     },
     {
       "hisse": "DEVA",
@@ -450,7 +450,7 @@
       "fiyat": NaN,
       "skor": 35,
       "robot_karari": "DİRENÇTE BEKLE 🛑",
-      "rsi_durumu": "Aşırı Alım 🔴 (RSI: 70.2)",
+      "rsi_durumu": "Aşırı Alım 🔴 (RSI: 71.0)",
       "ideal_alim": NaN,
       "tp": NaN,
       "sl": NaN,
@@ -459,8 +459,8 @@
       "direnc20": 253.75,
       "ma10": NaN,
       "ma30": NaN,
-      "rsi_deger": 70.2,
-      "hacim_orani": 1.1
+      "rsi_deger": 71.0,
+      "hacim_orani": 1.2
     },
     {
       "hisse": "BRSAN",
@@ -501,7 +501,7 @@
       "fiyat": NaN,
       "skor": 25,
       "robot_karari": "DİRENÇTE BEKLE 🛑",
-      "rsi_durumu": "Aşırı Alım 🔴 (RSI: 71.5)",
+      "rsi_durumu": "Aşırı Alım 🔴 (RSI: 68.1)",
       "ideal_alim": NaN,
       "tp": NaN,
       "sl": NaN,
@@ -510,7 +510,7 @@
       "direnc20": 51.05,
       "ma10": NaN,
       "ma30": NaN,
-      "rsi_deger": 71.5,
+      "rsi_deger": 68.1,
       "hacim_orani": 1.6
     }
   ],
