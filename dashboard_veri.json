@@ -1,5 +1,5 @@
 {
-  "son_guncelleme": "15.08.2026 06:36",
+  "son_guncelleme": "15.08.2026 07:14",
   "bist100_durum": "YÜKSELİŞ 📈 (%+0.28)",
   "toplam_hisse": 30,
   "hisseler": [
@@ -55,21 +55,21 @@
       "hacim_orani": 0.7
     },
     {
-      "hisse": "EGEEN",
+      "hisse": "AEFES",
       "fiyat": NaN,
-      "skor": 80,
-      "robot_karari": "GÜÇLÜ AL 🔥",
-      "rsi_durumu": "Aşırı Satım 🟢 (RSI: 30.3)",
+      "skor": 70,
+      "robot_karari": "KADEMELİ AL 📈",
+      "rsi_durumu": "Aşırı Satım 🟢 (RSI: 34.4)",
       "ideal_alim": NaN,
       "tp": NaN,
       "sl": NaN,
-      "s1": 5215.0,
-      "r1": 5312.5,
-      "direnc20": 5600.0,
+      "s1": 18.82,
+      "r1": 19.61,
+      "direnc20": 22.52,
       "ma10": NaN,
       "ma30": NaN,
-      "rsi_deger": 30.3,
-      "hacim_orani": 1.1
+      "rsi_deger": 34.4,
+      "hacim_orani": 1.9
     },
     {
       "hisse": "AKFGY",
@@ -110,7 +110,7 @@
       "fiyat": NaN,
       "skor": 70,
       "robot_karari": "KADEMELİ AL 📈",
-      "rsi_durumu": "Aşırı Satım 🟢 (RSI: 24.4)",
+      "rsi_durumu": "Aşırı Satım 🟢 (RSI: 33.2)",
       "ideal_alim": NaN,
       "tp": NaN,
       "sl": NaN,
@@ -119,8 +119,25 @@
       "direnc20": 51.2,
       "ma10": NaN,
       "ma30": NaN,
-      "rsi_deger": 24.4,
+      "rsi_deger": 33.2,
       "hacim_orani": 0.9
+    },
+    {
+      "hisse": "EGEEN",
+      "fiyat": NaN,
+      "skor": 70,
+      "robot_karari": "KADEMELİ AL 📈",
+      "rsi_durumu": "Aşırı Satım 🟢 (RSI: 28.2)",
+      "ideal_alim": NaN,
+      "tp": NaN,
+      "sl": NaN,
+      "s1": 5215.0,
+      "r1": 5312.5,
+      "direnc20": 5600.0,
+      "ma10": NaN,
+      "ma30": NaN,
+      "rsi_deger": 28.2,
+      "hacim_orani": 1.1
     },
     {
       "hisse": "ALBRK",
@@ -144,7 +161,7 @@
       "fiyat": NaN,
       "skor": 60,
       "robot_karari": "KADEMELİ AL 📈",
-      "rsi_durumu": "Nötr ⚪ (RSI: 42.6)",
+      "rsi_durumu": "Nötr ⚪ (RSI: 44.2)",
       "ideal_alim": NaN,
       "tp": NaN,
       "sl": NaN,
@@ -153,7 +170,7 @@
       "direnc20": 3.86,
       "ma10": NaN,
       "ma30": NaN,
-      "rsi_deger": 42.6,
+      "rsi_deger": 44.2,
       "hacim_orani": 2.1
     },
     {
@@ -178,7 +195,7 @@
       "fiyat": NaN,
       "skor": 60,
       "robot_karari": "KADEMELİ AL 📈",
-      "rsi_durumu": "Nötr ⚪ (RSI: 41.5)",
+      "rsi_durumu": "Nötr ⚪ (RSI: 43.4)",
       "ideal_alim": NaN,
       "tp": NaN,
       "sl": NaN,
@@ -187,7 +204,7 @@
       "direnc20": 1930.0,
       "ma10": NaN,
       "ma30": NaN,
-      "rsi_deger": 41.5,
+      "rsi_deger": 43.4,
       "hacim_orani": 1.8
     },
     {
@@ -246,7 +263,7 @@
       "fiyat": NaN,
       "skor": 60,
       "robot_karari": "KADEMELİ AL 📈",
-      "rsi_durumu": "Nötr ⚪ (RSI: 55.0)",
+      "rsi_durumu": "Nötr ⚪ (RSI: 53.5)",
       "ideal_alim": NaN,
       "tp": NaN,
       "sl": NaN,
@@ -255,25 +272,8 @@
       "direnc20": 182.91,
       "ma10": NaN,
       "ma30": NaN,
-      "rsi_deger": 55.0,
+      "rsi_deger": 53.5,
       "hacim_orani": 0.9
-    },
-    {
-      "hisse": "AEFES",
-      "fiyat": NaN,
-      "skor": 50,
-      "robot_karari": "DİRENÇTE BEKLE 🛑",
-      "rsi_durumu": "Nötr ⚪ (RSI: 35.7)",
-      "ideal_alim": NaN,
-      "tp": NaN,
-      "sl": NaN,
-      "s1": 18.82,
-      "r1": 19.61,
-      "direnc20": 22.52,
-      "ma10": NaN,
-      "ma30": NaN,
-      "rsi_deger": 35.7,
-      "hacim_orani": 1.9
     },
     {
       "hisse": "AGHOL",
@@ -365,7 +365,7 @@
       "fiyat": NaN,
       "skor": 50,
       "robot_karari": "DİRENÇTE BEKLE 🛑",
-      "rsi_durumu": "Nötr ⚪ (RSI: 55.9)",
+      "rsi_durumu": "Nötr ⚪ (RSI: 55.2)",
       "ideal_alim": NaN,
       "tp": NaN,
       "sl": NaN,
@@ -374,8 +374,8 @@
       "direnc20": 117.4,
       "ma10": NaN,
       "ma30": NaN,
-      "rsi_deger": 55.9,
-      "hacim_orani": 0.9
+      "rsi_deger": 55.2,
+      "hacim_orani": 0.8
     },
     {
       "hisse": "EUPWR",
@@ -399,7 +399,7 @@
       "fiyat": NaN,
       "skor": 35,
       "robot_karari": "DİRENÇTE BEKLE 🛑",
-      "rsi_durumu": "Aşırı Alım 🔴 (RSI: 69.1)",
+      "rsi_durumu": "Aşırı Alım 🔴 (RSI: 67.1)",
       "ideal_alim": NaN,
       "tp": NaN,
       "sl": NaN,
@@ -408,7 +408,7 @@
       "direnc20": 253.75,
       "ma10": NaN,
       "ma30": NaN,
-      "rsi_deger": 69.1,
+      "rsi_deger": 67.1,
       "hacim_orani": 0.9
     },
     {
@@ -416,7 +416,7 @@
       "fiyat": NaN,
       "skor": 35,
       "robot_karari": "DİRENÇTE BEKLE 🛑",
-      "rsi_durumu": "Aşırı Alım 🔴 (RSI: 71.0)",
+      "rsi_durumu": "Aşırı Alım 🔴 (RSI: 71.7)",
       "ideal_alim": NaN,
       "tp": NaN,
       "sl": NaN,
@@ -425,7 +425,7 @@
       "direnc20": 85.0,
       "ma10": NaN,
       "ma30": NaN,
-      "rsi_deger": 71.0,
+      "rsi_deger": 71.7,
       "hacim_orani": 0.8
     },
     {
@@ -467,7 +467,7 @@
       "fiyat": NaN,
       "skor": 35,
       "robot_karari": "DİRENÇTE BEKLE 🛑",
-      "rsi_durumu": "Aşırı Alım 🔴 (RSI: 65.8)",
+      "rsi_durumu": "Aşırı Alım 🔴 (RSI: 67.9)",
       "ideal_alim": NaN,
       "tp": NaN,
       "sl": NaN,
@@ -476,7 +476,7 @@
       "direnc20": 650.5,
       "ma10": NaN,
       "ma30": NaN,
-      "rsi_deger": 65.8,
+      "rsi_deger": 67.9,
       "hacim_orani": 2.5
     },
     {
@@ -484,7 +484,7 @@
       "fiyat": NaN,
       "skor": 35,
       "robot_karari": "DİRENÇTE BEKLE 🛑",
-      "rsi_durumu": "Aşırı Alım 🔴 (RSI: 75.3)",
+      "rsi_durumu": "Aşırı Alım 🔴 (RSI: 76.0)",
       "ideal_alim": NaN,
       "tp": NaN,
       "sl": NaN,
@@ -493,15 +493,15 @@
       "direnc20": 52.0,
       "ma10": NaN,
       "ma30": NaN,
-      "rsi_deger": 75.3,
-      "hacim_orani": 0.8
+      "rsi_deger": 76.0,
+      "hacim_orani": 0.7
     },
     {
       "hisse": "ECILC",
       "fiyat": NaN,
       "skor": 35,
       "robot_karari": "DİRENÇTE BEKLE 🛑",
-      "rsi_durumu": "Aşırı Alım 🔴 (RSI: 65.0)",
+      "rsi_durumu": "Aşırı Alım 🔴 (RSI: 66.4)",
       "ideal_alim": NaN,
       "tp": NaN,
       "sl": NaN,
@@ -510,7 +510,7 @@
       "direnc20": 79.0,
       "ma10": NaN,
       "ma30": NaN,
-      "rsi_deger": 65.0,
+      "rsi_deger": 66.4,
       "hacim_orani": 2.6
     }
   ],
@@ -518,10 +518,10 @@
     "Enerji": 53.8,
     "Teknoloji": 57.5,
     "Cimento": 61.2,
-    "Tekstil": 80.0,
+    "Gida": 60.0,
     "Gyo": 65.0,
+    "Tekstil": 70.0,
     "Banka": 60.0,
-    "Gida": 53.3,
     "DemirCelik": 43.3,
     "Ilac": 60.0,
     "Otomotiv": 60.0,
@@ -530,7 +530,7 @@
   },
   "en_guclu_sektor": [
     "Tekstil",
-    80.0
+    70.0
   ],
   "en_zayif_sektor": [
     "Kimya",
