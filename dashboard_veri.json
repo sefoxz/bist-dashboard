@@ -1,5 +1,5 @@
 {
-  "son_guncelleme": "16.08.2026 01:51",
+  "son_guncelleme": "16.08.2026 02:49",
   "bist100_durum": "YÜKSELİŞ 📈 (%+0.28)",
   "toplam_hisse": 30,
   "hisseler": [
@@ -16,9 +16,9 @@
       "r1": 645.0,
       "direnc20": 650.5,
       "ma10": 599.6,
-      "ma30": 567.52,
+      "ma30": 567.87,
       "rsi_deger": 71.4,
-      "hacim_orani": 2.6
+      "hacim_orani": 2.5
     },
     {
       "hisse": "ALGYO",
@@ -33,9 +33,9 @@
       "r1": 3.47,
       "direnc20": 3.86,
       "ma10": 3.38,
-      "ma30": 3.5,
+      "ma30": 3.51,
       "rsi_deger": 60.3,
-      "hacim_orani": 2.0
+      "hacim_orani": 2.1
     },
     {
       "hisse": "ECILC",
@@ -50,7 +50,7 @@
       "r1": 78.35,
       "direnc20": 79.0,
       "ma10": 71.44,
-      "ma30": 72.39,
+      "ma30": 72.45,
       "rsi_deger": 59.3,
       "hacim_orani": 2.6
     },
@@ -67,7 +67,7 @@
       "r1": 72.98,
       "direnc20": 77.6,
       "ma10": 70.96,
-      "ma30": 72.16,
+      "ma30": 72.14,
       "rsi_deger": 40.7,
       "hacim_orani": 0.8
     },
@@ -84,7 +84,7 @@
       "r1": 96.18,
       "direnc20": 108.6,
       "ma10": 91.63,
-      "ma30": 91.16,
+      "ma30": 90.8,
       "rsi_deger": 45.8,
       "hacim_orani": 1.0
     },
@@ -99,9 +99,9 @@
       "sl": 32.06,
       "s1": 32.69,
       "r1": 34.61,
-      "direnc20": 37.42,
+      "direnc20": 37.9,
       "ma10": 32.5,
-      "ma30": 34.53,
+      "ma30": 34.68,
       "rsi_deger": 39.3,
       "hacim_orani": 2.1
     },
@@ -118,7 +118,7 @@
       "r1": 247.4,
       "direnc20": 253.75,
       "ma10": 240.55,
-      "ma30": 237.24,
+      "ma30": 236.69,
       "rsi_deger": 59.6,
       "hacim_orani": 0.9
     },
@@ -135,9 +135,9 @@
       "r1": 20.92,
       "direnc20": 26.56,
       "ma10": 20.56,
-      "ma30": 23.74,
+      "ma30": 23.85,
       "rsi_deger": 22.6,
-      "hacim_orani": 1.3
+      "hacim_orani": 1.4
     },
     {
       "hisse": "BERA",
@@ -152,9 +152,26 @@
       "r1": 13.43,
       "direnc20": 15.18,
       "ma10": 13.04,
-      "ma30": 13.92,
+      "ma30": 13.98,
       "rsi_deger": 48.3,
-      "hacim_orani": 1.6
+      "hacim_orani": 1.7
+    },
+    {
+      "hisse": "CIMSA",
+      "fiyat": 45.64,
+      "skor": 70,
+      "robot_karari": "KADEMELİ AL 📈",
+      "rsi_durumu": "Aşırı Satım 🟢 (RSI: 24.6)",
+      "ideal_alim": 44.96,
+      "tp": 48.45,
+      "sl": 43.53,
+      "s1": 45.15,
+      "r1": 46.09,
+      "direnc20": 51.2,
+      "ma10": 45.2,
+      "ma30": 47.01,
+      "rsi_deger": 24.6,
+      "hacim_orani": 0.9
     },
     {
       "hisse": "ALBRK",
@@ -186,26 +203,9 @@
       "r1": 20.57,
       "direnc20": 19.97,
       "ma10": 18.22,
-      "ma30": 18.45,
+      "ma30": 18.44,
       "rsi_deger": 65.8,
-      "hacim_orani": 3.2
-    },
-    {
-      "hisse": "CIMSA",
-      "fiyat": 45.64,
-      "skor": 60,
-      "robot_karari": "KADEMELİ AL 📈",
-      "rsi_durumu": "Aşırı Satım 🟢 (RSI: 24.6)",
-      "ideal_alim": 44.96,
-      "tp": 48.45,
-      "sl": 43.53,
-      "s1": 45.15,
-      "r1": 46.09,
-      "direnc20": 51.2,
-      "ma10": 45.2,
-      "ma30": 47.08,
-      "rsi_deger": 24.6,
-      "hacim_orani": 0.9
+      "hacim_orani": 3.4
     },
     {
       "hisse": "ALFAS",
@@ -220,7 +220,7 @@
       "r1": 41.19,
       "direnc20": 47.94,
       "ma10": 41.55,
-      "ma30": 44.15,
+      "ma30": 44.2,
       "rsi_deger": 28.9,
       "hacim_orani": 0.9
     },
@@ -237,7 +237,7 @@
       "r1": 84.27,
       "direnc20": 85.0,
       "ma10": 78.85,
-      "ma30": 70.97,
+      "ma30": 70.77,
       "rsi_deger": 72.0,
       "hacim_orani": 0.8
     },
@@ -254,7 +254,7 @@
       "r1": 352.92,
       "direnc20": 353.0,
       "ma10": 315.9,
-      "ma30": 308.19,
+      "ma30": 307.55,
       "rsi_deger": 68.0,
       "hacim_orani": 1.1
     },
@@ -288,9 +288,9 @@
       "r1": 52.13,
       "direnc20": 52.0,
       "ma10": 49.32,
-      "ma30": 45.85,
+      "ma30": 45.7,
       "rsi_deger": 80.2,
-      "hacim_orani": 0.8
+      "hacim_orani": 0.7
     },
     {
       "hisse": "ALARK",
@@ -303,9 +303,9 @@
       "sl": 98.08,
       "s1": 101.4,
       "r1": 103.1,
-      "direnc20": 111.0,
+      "direnc20": 110.7,
       "ma10": 102.91,
-      "ma30": 103.37,
+      "ma30": 103.2,
       "rsi_deger": 45.8,
       "hacim_orani": 0.7
     },
@@ -322,7 +322,7 @@
       "r1": 4.99,
       "direnc20": 5.44,
       "ma10": 5.04,
-      "ma30": 5.25,
+      "ma30": 5.26,
       "rsi_deger": 41.0,
       "hacim_orani": 1.4
     },
@@ -339,7 +339,7 @@
       "r1": 5312.5,
       "direnc20": 5600.0,
       "ma10": 5253.5,
-      "ma30": 5426.17,
+      "ma30": 5435.42,
       "rsi_deger": 37.1,
       "hacim_orani": 1.1
     },
@@ -356,9 +356,9 @@
       "r1": 33.06,
       "direnc20": 36.12,
       "ma10": 34.31,
-      "ma30": 34.01,
+      "ma30": 33.98,
       "rsi_deger": 34.8,
-      "hacim_orani": 1.5
+      "hacim_orani": 1.6
     },
     {
       "hisse": "AKFGY",
@@ -390,7 +390,7 @@
       "r1": 84.87,
       "direnc20": 117.5,
       "ma10": 88.31,
-      "ma30": 94.59,
+      "ma30": 93.78,
       "rsi_deger": 29.4,
       "hacim_orani": 0.7
     },
@@ -407,7 +407,7 @@
       "r1": 85.88,
       "direnc20": 93.5,
       "ma10": 86.59,
-      "ma30": 87.25,
+      "ma30": 86.95,
       "rsi_deger": 31.8,
       "hacim_orani": 0.9
     },
@@ -424,9 +424,9 @@
       "r1": 1757.0,
       "direnc20": 1930.0,
       "ma10": 1761.0,
-      "ma30": 1794.6,
+      "ma30": 1797.1,
       "rsi_deger": 41.6,
-      "hacim_orani": 1.9
+      "hacim_orani": 1.8
     },
     {
       "hisse": "DOAS",
@@ -441,7 +441,7 @@
       "r1": 178.77,
       "direnc20": 182.91,
       "ma10": 176.12,
-      "ma30": 172.32,
+      "ma30": 172.31,
       "rsi_deger": 48.7,
       "hacim_orani": 0.9
     },
@@ -458,9 +458,9 @@
       "r1": 19.61,
       "direnc20": 22.52,
       "ma10": 20.88,
-      "ma30": 20.89,
+      "ma30": 20.88,
       "rsi_deger": 35.3,
-      "hacim_orani": 2.0
+      "hacim_orani": 1.9
     },
     {
       "hisse": "AKSA",
@@ -475,7 +475,7 @@
       "r1": 12.41,
       "direnc20": 13.28,
       "ma10": 12.34,
-      "ma30": 12.13,
+      "ma30": 12.11,
       "rsi_deger": 45.1,
       "hacim_orani": 2.1
     },
@@ -492,7 +492,7 @@
       "r1": 39.23,
       "direnc20": 48.3,
       "ma10": 40.69,
-      "ma30": 39.6,
+      "ma30": 39.56,
       "rsi_deger": 49.5,
       "hacim_orani": 1.5
     },
@@ -509,9 +509,9 @@
       "r1": 108.83,
       "direnc20": 117.4,
       "ma10": 110.3,
-      "ma30": 106.79,
+      "ma30": 106.66,
       "rsi_deger": 52.2,
-      "hacim_orani": 0.8
+      "hacim_orani": 0.9
     }
   ],
   "sektor_ortalamalar": {
@@ -519,7 +519,7 @@
     "Gyo": 65.0,
     "Ilac": 80.0,
     "Enerji": 51.9,
-    "Cimento": 58.8,
+    "Cimento": 61.2,
     "Teknoloji": 62.5,
     "Gida": 46.7,
     "Banka": 65.0,
