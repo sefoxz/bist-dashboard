@@ -1,5 +1,5 @@
 {
-  "son_guncelleme": "20.08.2026 15:52",
+  "son_guncelleme": "20.08.2026 16:22",
   "bist100_durum": "DÜŞÜŞ 📉 (%-0.43)",
   "toplam_hisse": 30,
   "hisseler": [
@@ -157,6 +157,23 @@
       "hacim_orani": 1.6
     },
     {
+      "hisse": "CANTE",
+      "fiyat": 1.21,
+      "skor": 70,
+      "robot_karari": "KADEMELİ AL 📈",
+      "rsi_durumu": "Nötr ⚪ (RSI: 51.9)",
+      "ideal_alim": 1.19,
+      "tp": 1.27,
+      "sl": 1.16,
+      "s1": 1.21,
+      "r1": 1.24,
+      "direnc20": 1.32,
+      "ma10": 1.2,
+      "ma30": 1.23,
+      "rsi_deger": 51.9,
+      "hacim_orani": 0.9
+    },
+    {
       "hisse": "CATES",
       "fiyat": 60.05,
       "skor": 70,
@@ -212,17 +229,17 @@
       "fiyat": 243.0,
       "skor": 55,
       "robot_karari": "DİRENÇTE BEKLE 🛑",
-      "rsi_durumu": "Nötr ⚪ (RSI: 62.5)",
+      "rsi_durumu": "Nötr ⚪ (RSI: 59.6)",
       "ideal_alim": 239.35,
       "tp": 255.15,
-      "sl": 235.13,
+      "sl": 235.21,
       "s1": 243.03,
       "r1": 247.43,
       "direnc20": 253.75,
       "ma10": 243.5,
-      "ma30": 238.74,
-      "rsi_deger": 62.5,
-      "hacim_orani": 0.6
+      "ma30": 238.98,
+      "rsi_deger": 59.6,
+      "hacim_orani": 0.5
     },
     {
       "hisse": "ALBRK",
@@ -308,23 +325,6 @@
       "ma30": 22.91,
       "rsi_deger": 44.8,
       "hacim_orani": 0.7
-    },
-    {
-      "hisse": "CANTE",
-      "fiyat": 1.21,
-      "skor": 50,
-      "robot_karari": "DİRENÇTE BEKLE 🛑",
-      "rsi_durumu": "Nötr ⚪ (RSI: 53.8)",
-      "ideal_alim": 1.19,
-      "tp": 1.27,
-      "sl": 1.16,
-      "s1": 1.21,
-      "r1": 1.24,
-      "direnc20": 1.32,
-      "ma10": 1.2,
-      "ma30": 1.23,
-      "rsi_deger": 53.8,
-      "hacim_orani": 0.9
     },
     {
       "hisse": "AEFES",
@@ -517,7 +517,7 @@
   "sektor_ortalamalar": {
     "Ilac": 95.0,
     "Holding": 65.0,
-    "Cimento": 56.2,
+    "Cimento": 61.2,
     "Enerji": 60.6,
     "Gida": 53.3,
     "DemirCelik": 50.0,
