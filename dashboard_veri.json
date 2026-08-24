@@ -1,5 +1,5 @@
 {
-  "son_guncelleme": "24.08.2026 05:58",
+  "son_guncelleme": "24.08.2026 07:09",
   "bist100_durum": "YÜKSELİŞ 📈 (%+0.82)",
   "toplam_hisse": 30,
   "hisseler": [
@@ -106,23 +106,6 @@
       "hacim_orani": 4.8
     },
     {
-      "hisse": "AHGAZ",
-      "fiyat": 33.3,
-      "skor": 70,
-      "robot_karari": "KADEMELİ AL 📈",
-      "rsi_durumu": "Nötr ⚪ (RSI: 57.7)",
-      "ideal_alim": 32.8,
-      "tp": 35.63,
-      "sl": 31.56,
-      "s1": 33.24,
-      "r1": 33.84,
-      "direnc20": 36.42,
-      "ma10": 32.92,
-      "ma30": 34.01,
-      "rsi_deger": 57.7,
-      "hacim_orani": 0.6
-    },
-    {
       "hisse": "CANTE",
       "fiyat": 1.21,
       "skor": 70,
@@ -189,6 +172,23 @@
       "ma30": 92.49,
       "rsi_deger": 56.2,
       "hacim_orani": 0.6
+    },
+    {
+      "hisse": "AHGAZ",
+      "fiyat": NaN,
+      "skor": 60,
+      "robot_karari": "KADEMELİ AL 📈",
+      "rsi_durumu": "Nötr ⚪ (RSI: 57.5)",
+      "ideal_alim": NaN,
+      "tp": NaN,
+      "sl": NaN,
+      "s1": 33.06,
+      "r1": 33.71,
+      "direnc20": 35.84,
+      "ma10": NaN,
+      "ma30": NaN,
+      "rsi_deger": 57.5,
+      "hacim_orani": 0.0
     },
     {
       "hisse": "AKCNS",
@@ -517,7 +517,7 @@
   "sektor_ortalamalar": {
     "Gida": 55.0,
     "Cimento": 72.5,
-    "Enerji": 60.0,
+    "Enerji": 58.8,
     "Holding": 65.0,
     "Kimya": 65.0,
     "Banka": 55.0,
