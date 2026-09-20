@@ -1,8 +1,42 @@
 {
-  "son_guncelleme": "20.09.2026 13:56",
+  "son_guncelleme": "20.09.2026 17:18",
   "bist100_durum": "DÜŞÜŞ 📉 (%-1.67)",
   "toplam_hisse": 30,
   "hisseler": [
+    {
+      "hisse": "ALGYO",
+      "fiyat": NaN,
+      "skor": 70,
+      "robot_karari": "KADEMELİ AL 📈",
+      "rsi_durumu": "Aşırı Satım 🟢 (RSI: 28.8)",
+      "ideal_alim": NaN,
+      "tp": NaN,
+      "sl": NaN,
+      "s1": 3.21,
+      "r1": 3.5,
+      "direnc20": 3.89,
+      "ma10": NaN,
+      "ma30": NaN,
+      "rsi_deger": 28.8,
+      "hacim_orani": 0.9
+    },
+    {
+      "hisse": "BRSAN",
+      "fiyat": NaN,
+      "skor": 70,
+      "robot_karari": "KADEMELİ AL 📈",
+      "rsi_durumu": "Aşırı Satım 🟢 (RSI: 23.8)",
+      "ideal_alim": NaN,
+      "tp": NaN,
+      "sl": NaN,
+      "s1": 617.17,
+      "r1": 652.67,
+      "direnc20": 759.5,
+      "ma10": NaN,
+      "ma30": NaN,
+      "rsi_deger": 23.8,
+      "hacim_orani": 0.6
+    },
     {
       "hisse": "CCOLA",
       "fiyat": 80.0,
@@ -106,23 +140,6 @@
       "hacim_orani": 2.8
     },
     {
-      "hisse": "ALGYO",
-      "fiyat": 3.25,
-      "skor": 45,
-      "robot_karari": "DİRENÇTE BEKLE 🛑",
-      "rsi_durumu": "Aşırı Satım 🟢 (RSI: 27.3)",
-      "ideal_alim": 3.2,
-      "tp": 3.56,
-      "sl": 3.02,
-      "s1": 3.21,
-      "r1": 3.5,
-      "direnc20": 3.89,
-      "ma10": 3.58,
-      "ma30": 3.58,
-      "rsi_deger": 27.3,
-      "hacim_orani": 0.9
-    },
-    {
       "hisse": "ARDYZ",
       "fiyat": 61.4,
       "skor": 45,
@@ -189,23 +206,6 @@
       "ma30": 13.45,
       "rsi_deger": 28.7,
       "hacim_orani": 0.9
-    },
-    {
-      "hisse": "BRSAN",
-      "fiyat": 655.5,
-      "skor": 45,
-      "robot_karari": "DİRENÇTE BEKLE 🛑",
-      "rsi_durumu": "Aşırı Satım 🟢 (RSI: 31.1)",
-      "ideal_alim": 645.67,
-      "tp": 703.14,
-      "sl": 619.77,
-      "s1": 617.17,
-      "r1": 652.67,
-      "direnc20": 759.5,
-      "ma10": 691.6,
-      "ma30": 682.5,
-      "rsi_deger": 31.1,
-      "hacim_orani": 0.6
     },
     {
       "hisse": "BRYAT",
@@ -515,13 +515,13 @@
     }
   ],
   "sektor_ortalamalar": {
+    "Gyo": 47.5,
+    "DemirCelik": 53.3,
     "Gida": 50.0,
     "Ilac": 70.0,
     "Enerji": 46.2,
     "Cimento": 40.0,
-    "Gyo": 35.0,
     "Teknoloji": 45.0,
-    "DemirCelik": 45.0,
     "Otomotiv": 45.0,
     "Holding": 32.5,
     "Kimya": 30.0,
